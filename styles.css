@@ -1,0 +1,203 @@
+
+/*Load google font*/
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+
+
+
+/* Reset Styles */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	/* vertical-align: baseline; */
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+/* set light mode colors as default value */
+/* :root {
+	--bg-color: #ffffff;
+}
+*/
+/* switch to dark mode color */
+/*
+@media (prefers-color-scheme: dark) {
+	--bg-color: #111A2C;
+  } */
+/* Light mode */
+@media (prefers-color-scheme: light) {
+	body {
+		background-color: white;
+		color: black;
+		}
+		code {
+			font-family: Consolas,"courier new";
+			/* color: crimson; */
+			background-color: #F5F5F5;
+			padding: 0.25em;
+			font-size: 0.9em;
+			}
+	
+	}
+  
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+	body {
+		background-color: #111A2C;
+		color: white;
+		}
+	
+	code {
+		font-family: Consolas,"courier new";
+		/* color: crimson; */
+		background-color: #17233B;
+		padding: 0.25em;
+		font-size: 0.9em;
+		}
+		
+	}
+
+
+body {
+	font-family: Lato;
+	font-size: medium;
+	font-weight: normal;
+	/* background: var(--bg-color); */
+  }
+
+div.header {
+	display: block;
+	/* flex-wrap: wrap; */
+	height: 7em;
+	background-color: #1B2845;
+	border-top: 0.2em solid #3E7CB1;
+	color: rgb(235, 250, 255);
+	/* padding-left: 10%; */
+	/* padding: 5px; */
+
+}
+
+.hleft{
+	margin-left: 5%;
+	margin-top: 0.5em;
+	height: calc(100% - 0.5em);
+	width: 6.5em;
+	float: left;
+	/* width: 1em; */
+	/* padding-left: 0; */
+}
+
+.hleft img{
+	
+	display: block;
+	width: 85%;
+	height: auto;
+	margin: auto;
+
+	/* padding-top: 0.1em; */
+}
+
+.hright{
+	margin-top: 0.5em;
+	height: calc(100% - 0.5em);
+	width: calc(100vw - 8em - 5%);
+	/* margin-left: 6em; */
+	float: left;
+	font-weight: lighter;
+}
+
+.hright a{
+	text-decoration: none;
+	color: inherit;
+	font-weight: lighter;
+}
+
+.hrtop{
+	font-size: 3em;
+	/* font-weight: lighter; */
+}
+
+.hright strong{
+	font-weight: bold;
+}
+
+.hrbot{
+	/* display:block */
+	line-height: 2.75em;
+	/* font-weight: bold; */
+	/* vertical-align: bottom; */
+	/* padding-left: 0.5em; */
+	/* padding-right: 0.5em; */
+}
+
+.hrbot span{
+	padding-left: 0.25em;
+	padding-right: 1.25em;
+}
+
+@media only screen and (orientation: landscape){
+	.content{
+		/* margin-top: 6em; */
+		width: 80%;
+		line-height: 1.5em;
+		padding-left: 10%;
+		padding-right: 10%;
+		padding-top: 1.25em;
+	}
+}
+
+@media only screen and (orientation: portrait){
+	.content{
+		/* margin-top: 6em; */
+		width: 95%;
+		line-height: 1.5em;
+		padding-left: 2%;
+		padding-right: 3%;
+		padding-top: 1.25em;
+	}
+}
+
+.content h1{
+	font-size: 1.5em;
+	margin-top: 1.5em;
+	margin-bottom: 0.75em;
+}
+
+.content h2{
+	font-weight: bold;
+	font-size: 1.1em;
+	margin-top: 1em;
+	margin-bottom: 0.5em;
+}
+
+.content ul{
+	margin-left: 2em;
+}
+
+.content ol{
+	margin-left: 2em;
+}
+
+.content a{
+	text-decoration: none;
+	color: inherit;
+	/* font-weight: lighter;	 */
+}
