@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>KiteRange</title>
+	<link rel="icon" href="./images/icon.png" type="image/icon type">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta property="og:title" content="Harsh Nisar" />
+    <meta property="og:image" content="https://harshnisar.com/images/ogimage.png"/>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-171393756-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-171393756-1');
+	</script>
+
+
+</head>
+<body>
+	<div class="header">
+		<div class="hleft">
+			<a href="./index.html">
+			<img src="./images/photo.svg" alt="Harsh Nisar">
+		</a>
+		</div>
+		<div class="hright">
+			<div class="hrtop">
+				<a href="./index.html" title="Harsh Nisar">harsh<strong>nisar</strong></a>
+				<!-- harshnisar -->
+			</div>
+			<div class="hrbot">
+				<span>
+                    <a href="index.html">
+                    HOME</span>
+                    </a>
+				<span>
+					<a href="project.html">
+                        <strong><u>PROJECTS</u></strong> 
+                </a><strong> > </strong>
+                    <a href="KiteRange.html"><strong>KiteRange</strong></a>
+				</span>
+			</div>
+		</div>
+	</div>
+		
+	<div class="content">
+		
+		<article id="KiteRange">
+		<h1>KiteRange</h1>
+		<p>
+        	A light standalone autonomous trading module which trades intraday range breakouts.
+		</p>
+		<p id="Background">
+			<h2>Background</h2>
+			KiteRange is a simple yet robust module that allows users who have minimal
+			knowledge about programming, Python or the KiteConnect API to get started with system
+			trading.
+			<br>
+			The module implements a proven intraday range breakout
+			strategy. Here is how it works: during a trading day, first the stock range is established,
+			then a breakout of the said range is traded in the breakout's direction with trailing stop loss.
+			<br>
+			In the interest of keeping full control in the hands of the trader, an ABORT
+			method has been implement to exit the trade and all orders associated with
+			it at the user's discretion.
+			The system automatically exits at a user-prescribed time. Check 
+			<a href="project.html#Workflow"><u>workflow</u></a> below for more.
+		</p>
+		<p id="Requirements">
+			<h2>Requirements</h2>
+			<ul>
+				<li><a href="https://zerodha.com/open-account">
+					<u>An account with Zerodha for equity trading</u></a></li>
+				<li><a href="https://developers.kite.trade/login">
+					<u>KiteConnect enabled</u></a>
+
+				</li>
+				<li><a href="https://kite.trade/individuals">
+					<u>An activated App</u></a></li>
+				<li>Historical Data/Candles API subscription added-on</li>
+				<li>Python 3 installed, preferably with 
+					<a href="https://www.anaconda.com/products/individual#Downloads">
+					<u>Anaconda</u></a>
+					 for Windows users</li>
+				<li><a href="https://github.com/zerodhatech/pykiteconnect#installing-the-client">
+					<u>KiteConnect Python API</u></a>
+					 installed</li>
+				<li><a href="project.html#GCP">
+					<u>Optional</u></a>: <a href="https://cloud.google.com/">
+					<u>GCP</u></a>
+					Account</li>
+			</ul>
+		</p>
+		<p id="Setup">
+			<h2>Setup</h2>
+			<a href="./download/setup.py" download="setup.py">
+			<u>Download the setup script</u>
+			</a>
+			to the installation directory and run it. You will need a secret code to install 
+			the package onto your system. Please contact me @harshnisar on <a href="https://twitter.com/harshnisar"><u>Twitter</u></a> or <a href="https://t.me/harshnisar"><u>Telegram</u></a> for the code.
+		</p>
+		
+		<p id="Workflow">
+			<h2>Workflow</h2>
+			KiteRange has been built to require minimum commands to get going.
+			Simply follow the steps below:
+			<ol>
+				<li>
+					Import modules <br>
+					<code>>> from Instance import Instance</code>
+					<br>
+					<code>>> from Range import Range</code>
+				</li>
+				<li>
+					Generate an Instance <br>
+					<code>>> I = Instance()</code>
+				</li>
+				<li>
+					Start the strategy using Range<br>
+					<code>>> infy = Range(I,'INFY')</code><br>
+				</li>
+			</ol>
+			Done!<br>With these steps, once every day, your strategy is up and running. It will wait till the intraday range is defined.
+			Then it will fire orders to enter trades in the direction of breakout in both direction (long/short).
+			Once an order is traded, a subsequent square-off trailing stop loss order will be fired.
+			The stop loss will be trailed throught the day till the strategy is live.
+			Before the day close, any active positions will be squared off and any open orders will be cancelled.
+			<br>
+			If you are a new KiteConnect user, please start with the <code>headless</code> flag set to <code>False</code> so as to <a href="project.html#First_Time_Auth"><u>manually authorize</u></a> KiteConnect to link to Kite.
+			<br>
+			See the <a href="project.html#Information"><u>Information</u></a> section for more details.
+			<!-- <code>from sdf import sdd </code> -->
+			<br>
+		</p>
+
+		<p id="GCP">
+			<h2>GCP Setup</h2>
+			Since the codebase is so light, start with a minimal <a href="https://cloud.google.com/compute"><u>Compute Engine</u></a> Instance (<a href="https://cloud.google.com/compute/docs/machine-types"><u>f1-micro</u></a> should suffice). I prefer using the latest LTS Ubuntu minimal <a href="https://cloud.google.com/compute/docs/images#os-compute-support"><u>image</u></a> to boot from. Ensure the timezone is correct. <a href="project.html#Setup"><u>Setup</u></a> KiteRange on the instance.
+			<br>
+			Once KiteRange is installed, the user can treat the cloud instance as a local machine and carry on as if it is a local device. I rather suggest using the instance as a dumb box, with minimal input required from the user, that is turning the instance on/off. Meaning the user simply turns the instance on in the morning, sometime before the opening bell, then the KiteRange runs automatically at startup, for a set of predefined scrips, and after closing bell, the user shuts the instance down. This should happen with the option for the user to track KiteRange anytime the user wishes. So,
+			<ul>
+				<li>
+					Create a <code>run.py</code> script in the KiteRange working directory. This script should contain all the commands described in <a href="project.html#Workflow"><u>Workflow</u></a>, so for example <br>
+					<code>
+						from Instance import Instance <br>
+						from Range import Range <br>
+						I = Instance()<br>
+						infy = Range(I,'INFY')<br>
+						tcs = Range(I,'TCS',Q=5,define_time='09:35')
+					</code>
+				</li>
+				<li>
+					Create a <code>run.sh</code> bash script in the working directory which runs <code>run.py</code> in an interactive <a href="https://ipython.org/"><u>ipython</u></a><br>
+					<code>
+						#!/bin/bash -e <br>
+						ipython3 -i run.py
+					</code>
+				</li>
+				<li>
+					Create a <code>startup.sh</code> bash script which is run by <a href="https://man7.org/linux/man-pages/man5/crontab.5.html"><u>contrab</u></a> at startup to execute <code>run.sh</code> on a detached <a href="https://www.gnu.org/software/screen/manual/screen.html"><u>screen</u></a><br>
+					<code>
+						#!/bin/bash -e <br>
+						screen -d -m -S kiterange ./run.sh
+					</code>
+				</li>
+				<li>
+					Finally add <code>startup.sh</code> to the contrab file. <br>
+					<code>
+						$ contrab -e
+					</code>  <br>
+					and add <code>@reboot /kiterange-working-directory-/startup.sh</code> to the file, where <code>kiterange-working-directory</code> is the working directory whre <code>startup.sh</code> is located
+				</li>
+				<li>
+					Done! Now anytime the user intends to see how the KiteRange execution is going on, simple resume the screen.  <br>
+					<code>
+						$ screen -r
+					</code>
+				</li>
+			</ul>
+			Since all user credentials are stored in an encrypted file in the workind directory, user input will always be required to decrypt that file at each log into the API. So the user needs to ssh into the instance, resume the screen and provide the password at every run.
+			
+		</p>
+
+		<p id="Information">
+			<h2>Information</h2>
+			<ol>
+				<li>
+					<a href="#Setup"><u>Setup:</u></a> It will be ensured here that all <a href="#Requirements"><u>requirements</u></a> are met and the necessary items are installed. The setup will show any unmet requirements when it is done. Please ensure these are complete before proceeding to run the strategy.
+					<br>Here is a summary of what setup does:
+					<ul>
+						<li>
+							Dependencies: KiteRange uses a few libraries which are not a part of the <a href="https://docs.python.org/3/library/">python standary libraries</a>. If your system is missing a library, setup will add it to the list of unmet requirements.
+						</li> 
+						<li>
+							Installation Directory: Its best to install everything in its own directory. This will be the working directory from where the strategy should be run. Any required files will also be stored here.
+						</li>
+						<li>
+							Credentials: Logging into KiteConnect everyday is tedious. So at setup, all relevant credentials, including the Kite ClientID, password, PIN, API Key and API Secret are stored in a local encrypted <code>cred</code> file whose password is set during setup.
+						</li>
+						<li>
+							Chrome Driver: In inclination of convenience, web-scrapping is used to log into the API every morning which automates the login procedure using a headless Chrome browser. Please save a compatible version of <a href="https://chromedriver.chromium.org/downloads"><u>chromedriver</u></a> to the working directory. It goes without saying, Google Chrome must be installed on the system.
+						</li>
+					</ul>
+				</li>
+				<li>
+					Instance Module: KiteConnect API will be logged into and the session's instance will be stored here.
+					<ul>
+						<li>
+							Login: Credentials stored during setup will be used to log-in to your app on KiteConnect.
+							In order to modify these credentials, use the <code>modify_cred</code> arguement and provide the updated values.
+							<br>
+							<code>>> I = Instance(modify_cred=True)</code>
+						</li>
+						<li id="First_Time_Auth">
+							First Time Authorization: For a new KiteConnect user, Zerodha asks for one time authorization to enable linking Kite and KiteConnect. To do this, launch with the <code>headless</code> flag set to <code>False</code>
+							<br>
+							<code>>> I = Instance(headless=False)</code>
+							After ever auto-action in the browser, press return in the python console for the next action, except for the authorization part, where the user needs to manually click on Authorize.
+						</li>
+						<li>
+							Scrip Master: At login, a master scrip file is downloaded and saved. Because of this login will take a few seconds depending upon your connection. Check the master to see all available instruments for the day.
+							<br>
+							<code>>> I.master</code>
+						</li>
+						<li>
+							Kite: All <a href="https://kite.trade/docs/pykiteconnect/v3/"><u>API calls to KiteConnect</u></a> are made thru the <code>kite</code> attribute of <code>Instance</code>. For example:<br> 
+							<code>>> I.kite.ohlc('NSE:INFY')</code>
+						</li>
+						<li>
+							ReKite: There is a restriction to the number of simultaneous requests in KiteConnect. When the number of these requests exceed the limit, the API throws an exception, which breaks a thread if not handled correctly. ReKite is a wrapper around Kite which makes all those API calls for you but if an exception is raised indicating exhaustion of simultaneous requests, it waits a bit and retries till the API successfully returns without exception. 
+							
+							So instead of calling kite methods thru kite, one can call them thru rekite.<br>
+							<code>>> I.rekite.ohlc('NSE:INFY')</code>
+						</li>
+					</ul>
+				</li>
+				<li>
+					Range Module: The strategy is run by this.
+					<ul>
+						<li>
+							Range Object: For set of input parameters, like instrument, quantity etc. create an object with default arguements.
+							<br><code>infy = Range(I, 'INFY', Q=100)</code>
+							<br><code>sbin = Range(I, 'SBIN', Q=400)</code>
+						</li>
+						<li>
+							Quantity <code>Q</code>: The number of shares to be traded.
+						</li>
+						<li>
+							Ticker: this is an area of future developement. For now pass null.
+							<br><code>infy = Range(I, 'INFY', Q=100, ticker=None)</code>
+						</li>
+						<li>
+							Restart: use the <code>fresh</code> attribute to restart the module in case if it was exit unexpectedly.
+							<br><code>infy = Range(I, 'INFY', Q=100, ticker=None, fresh=False)</code>
+						</li>
+						<li>
+							Signals only: The <code>no_trade</code> attribute will be used in conjunction with <code>Ticker</code> for future developement. For now pass <code>False</code>
+							<br><code>infy = Range(I, 'INFY', Q=100, ticker=None, fresh=False, no_trade=False)</code>
+						</li>
+						<li>
+							Time: Setup various times of interest:
+							<ul>
+								<li>
+									<code>start_time</code>: Opening Bell
+								</li>
+								<li>
+									<code>end_time</code>: Closing Bell
+								</li>
+								<li>
+									<code>define_time</code>: Time when the instrument's range is defined
+								</li>
+								<li>
+									<code>square_time</code>: Time when everything is exit.
+								</li>
+							</ul>
+							<code>infy = Range(I, 'INFY' ,Q=100 ,ticker=None ,fresh=True, no_trade=False, define_time='09:25', square_time='15:17', start_time='09:15', end_time='15:30', verbose=False)</code>
+						</li>
+						<li>
+							Verbosity: Print verbose updates to console with <code>verbose=True</code>
+						</li>
+						<li>
+							Orders: The <code>orders</code> attributre stores a dictionary of active orders and the time when they were traded (if they were traded)
+							<br>
+							<code>>> infy.orders</code> <br>
+							might return 
+							<br>
+							<code>
+								{'long': ['123456789123456', '11:25:02'],<br>
+		 						'short': ['123456789123457', '14:25:07'],<br>
+		 						'sqlong': ['123456789123458', '14:20:19'],<br>
+		 						'sqshort': ['123456789123459', '']}
+							</code>
+						</li>
+						<li>
+							Restarting: In case for some unforeseen reason, if a session crashes, then to fetch the state prior to crashing back again, pass <code>fresh=True</code> as discussed above. This goes through the order books and finds relevant orders and populates the <code>orders</code> attribute. Once you approve orders, it restarts the strategy.
+						</li>
+						<li>
+							Abort: To prematurely close all open orders and exit positions, call <code>abort</code>
+							<br><code>>> infy.abort()</code>
+						</li>
+						<li>
+							MIS Assumption: The system defaults to ordering stock underlying using the MIS product. This is the ideal application for MIS where the leverage is usually greater than that for derivative products.
+						</li>
+					</ul>
+				</li>
+				
+			</ol>
+		</p>
+		<p id="Access">
+			<h2>Access</h2>
+			Presently KiteRange isn't availably freely. If you are interested, send an <a href="mailto:harsh@harshnisar.com"><u>email</u></a> or contact me @harshnisar on <a href="https://twitter.com/harshnisar"><u>Twitter</u></a> or <a href="https://t.me/harshnisar"><u>Telegram</u></a> for access. Else you can always go get some <a href="https://www.youtube.com/playlist?list=PLSibrTlzpHuohG3sWuLr44jXOMROWoPZv">phish</a>.
+		</p>
+		</article>
+	</div>
+	<div class="footer">
+		<br>
+		<br>
+	</div>
+
+</body>
+</html>
