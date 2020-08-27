@@ -149,8 +149,8 @@ div.header {
 }
 
 .hrbot span{
-	padding-left: 0.25em;
-	padding-right: 1.25em;
+	padding-left: 0.1em;
+	padding-right: 1.em;
 }
 
 @media only screen and (orientation: landscape){
