@@ -25,25 +25,25 @@
 <body>
 	<div class="header">
 		<div class="hleft">
-			<a href="./index.html">
+			<a href="./index">
 			<img src="./images/photo.svg" alt="Harsh Nisar">
 		</a>
 		</div>
 		<div class="hright">
 			<div class="hrtop">
-				<a href="./index.html" title="Harsh Nisar">harsh<strong>nisar</strong></a>
+				<a href="./index" title="Harsh Nisar">harsh<strong>nisar</strong></a>
 				<!-- harshnisar -->
 			</div>
 			<div class="hrbot">
 				<span>
-                    <a href="index.html">
+                    <a href="index">
                     HOME</span>
                     </a>
 				<span>
-					<a href="project.html">
+					<a href="projects">
                         <strong>PROJECTS</strong> 
                 </a><strong> > </strong>
-                    <a href="KiteRange.html"><strong><u>KiteRange</u></strong></a>
+                    <a href="KiteRange"><strong><u>KiteRange</u></strong></a>
 				</span>
 			</div>
 		</div>
@@ -70,7 +70,7 @@
 			method has been implement to exit the trade and all orders associated with
 			it at the user's discretion. Also, a part-squareoff method to discretionarily exit part of a position prematurely.
 			The system automatically exits at a user-prescribed time. Check 
-			<a href="KiteRange.html#Workflow"><u>workflow</u></a> below for more.
+			<a href="KiteRange#Workflow"><u>workflow</u></a> below for more.
 		</p>
 		<p id="Requirements">
 			<h2>Requirements</h2>
@@ -91,7 +91,7 @@
 				<li><a href="https://github.com/zerodhatech/pykiteconnect#installing-the-client">
 					<u>KiteConnect Python API</u></a>
 					 installed</li>
-				<li><a href="KiteRange.html#GCP">
+				<li><a href="KiteRange#GCP">
 					<u>Optional</u></a>: <a href="https://cloud.google.com/">
 					<u>GCP</u></a>
 					Account</li>
@@ -132,21 +132,21 @@
 			The stop loss will be trailed throught the day till the strategy is live.
 			Before the day close, any active positions will be squared off and any open orders will be cancelled.
 			<br>
-			If you are a new KiteConnect user, please start with the <code>headless</code> flag set to <code>False</code> so as to <a href="KiteRange.html#First_Time_Auth"><u>manually authorize</u></a> KiteConnect to link to Kite.
+			If you are a new KiteConnect user, please start with the <code>headless</code> flag set to <code>False</code> so as to <a href="KiteRange#First_Time_Auth"><u>manually authorize</u></a> KiteConnect to link to Kite.
 			<br>
-			See the <a href="KiteRange.html#Information"><u>Information</u></a> section for more details.
+			See the <a href="KiteRange#Information"><u>Information</u></a> section for more details.
 			<!-- <code>from sdf import sdd </code> -->
 			<br>
 		</p>
 
 		<p id="GCP">
 			<h2>GCP Setup</h2>
-			Since the codebase is so light, start with a minimal <a href="https://cloud.google.com/compute"><u>Compute Engine</u></a> Instance (<a href="https://cloud.google.com/compute/docs/machine-types"><u>f1-micro</u></a> should suffice). I prefer using the latest LTS Ubuntu minimal <a href="https://cloud.google.com/compute/docs/images#os-compute-support"><u>image</u></a> to boot from. Ensure the timezone is correct. <a href="KiteRange.html#Setup"><u>Setup</u></a> KiteRange on the instance.
+			Since the codebase is so light, start with a minimal <a href="https://cloud.google.com/compute"><u>Compute Engine</u></a> Instance (<a href="https://cloud.google.com/compute/docs/machine-types"><u>f1-micro</u></a> should suffice). I prefer using the latest LTS Ubuntu minimal <a href="https://cloud.google.com/compute/docs/images#os-compute-support"><u>image</u></a> to boot from. Ensure the timezone is correct. <a href="KiteRange#Setup"><u>Setup</u></a> KiteRange on the instance.
 			<br>
 			Once KiteRange is installed, the user can treat the cloud instance as a local machine and carry on as if it is a local device. I rather suggest using the instance as a dumb box, with minimal input required from the user, that is turning the instance on/off. Meaning the user simply turns the instance on in the morning, sometime before the opening bell, then the KiteRange runs automatically at startup, for a set of predefined scrips, and after closing bell, the user shuts the instance down. This should happen with the option for the user to track KiteRange anytime the user wishes. So,
 			<ul>
 				<li>
-					Create a <code>run.py</code> script in the KiteRange working directory. This script should contain all the commands described in <a href="KiteRange.html#Workflow"><u>Workflow</u></a>, so for example <br>
+					Create a <code>run.py</code> script in the KiteRange working directory. This script should contain all the commands described in <a href="KiteRange#Workflow"><u>Workflow</u></a>, so for example <br>
 					<code>
 						from Instance import Instance <br>
 						from Range import Range <br>
