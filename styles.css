@@ -48,14 +48,27 @@ footer, header, hgroup, menu, nav, section {
 		background-color: white;
 		color: black;
 		}
-		code {
-			font-family: Consolas,"courier new";
-			/* color: crimson; */
-			background-color: #F5F5F5;
-			padding: 0.25em;
-			font-size: 0.9em;
-			}
-	
+	code {
+		font-family: Consolas,"courier new";
+		/* color: crimson; */
+		background-color: #F5F5F5;
+		padding: 0.25em;
+		font-size: 0.9em;
+		}
+	date {
+		font-family: Consolas,"courier new";
+		/* color: crimson; */
+		font-weight: normal;
+		background-color: #F5F5F5;
+		margin-left: 1em;
+		padding: 0.25em;
+		font-size: 0.9em;
+		}
+	div.footer img{
+			max-width: 100%;
+			content: url("./images/skyline_light.svg")
+		}
+		
 	}
   
 /* Dark mode */
@@ -72,6 +85,20 @@ footer, header, hgroup, menu, nav, section {
 		padding: 0.25em;
 		font-size: 0.9em;
 		}
+	
+	date {
+		font-family: Consolas,"courier new";
+		/* color: crimson; */
+		font-weight: normal;
+		background-color: #17233B;
+		margin-left: 1em;
+		padding: 0.25em;
+		font-size: 0.9em;
+		}
+	div.footer img{
+		max-width: 100%;
+		content: url("./images/skyline_dark.svg")
+	}
 		
 	}
 
@@ -94,6 +121,7 @@ div.header {
 	/* padding: 5px; */
 
 }
+
 
 .hleft{
 	margin-left: 5%;
@@ -177,16 +205,33 @@ div.header {
 
 .content h1{
 	font-size: 1.5em;
-	margin-top: 0.5em;
+	margin-top: 0.75em;
 	margin-bottom: 0.75em;
 }
 
 .content h2{
-	font-weight: bold;
-	font-size: 1.1em;
-	margin-top: 1em;
+	/*font-weight: bold;*/
+	font-size: 1.25em;
+	margin-top: 0.5em;
 	margin-bottom: 0.5em;
 }
+
+.content h3{
+	
+	font-variant: small-caps;
+	font-size: 1.2em;
+	margin-top: 0.75em;
+	/*margin-bottom: 0.5em;*/
+}
+
+.content h4{
+	font-style: italic;
+	font-size: 1.00em;
+	/*margin-top: 0.4em;
+	margin-bottom: 0.4em;*/
+}
+
+
 
 .content ul{
 	margin-left: 2em;
@@ -201,3 +246,4 @@ div.header {
 	color: inherit;
 	/* font-weight: lighter;	 */
 }
+
