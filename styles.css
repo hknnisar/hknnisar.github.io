@@ -43,6 +43,13 @@ footer, header, hgroup, menu, nav, section {
 	--bg-color: #111A2C;
   } */
 /* Light mode */
+
+html {
+	height: 100%;
+	box-sizing: border-box;
+  }
+  
+
 @media (prefers-color-scheme: light) {
 	body {
 		background-color: white;
@@ -107,6 +114,10 @@ body {
 	font-family: Lato;
 	font-size: medium;
 	font-weight: normal;
+	position: relative;
+	margin: 0;
+	padding-bottom: 6rem;
+	min-height: 100%;
 	/* background: var(--bg-color); */
   }
 
@@ -122,6 +133,12 @@ div.header {
 
 }
 
+div.footer {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
 
 .hleft{
 	margin-left: 5%;
