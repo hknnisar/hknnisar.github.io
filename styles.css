@@ -252,8 +252,17 @@ div.footer {
 	/*margin-top: 0.4em;
 	margin-bottom: 0.4em;*/
 }
+.content h5{
+	font-weight: bold;
+	font-size: 1.00em;
+	margin-top: 0.2em;
+	margin-bottom: 0.2em;
+}
 
-
+.content table{
+	text-align: left
+	
+}
 
 .content ul{
 	margin-left: 2em;
