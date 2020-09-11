@@ -143,7 +143,7 @@ div.footer {
 .hleft{
 	margin-left: 5%;
 	margin-top: 0.5em;
-	height: calc(100% - 0.5em);
+	/*height: calc(100% - 0.5em);*/
 	width: 6.5em;
 	float: left;
 	/* width: 1em; */
@@ -163,7 +163,7 @@ div.footer {
 .hright{
 	margin-top: 0.5em;
 	height: calc(100% - 0.5em);
-	width: calc(100vw - 8em - 5%);
+	/*width: calc(100vw - 8em - 5%);*/
 	/* margin-left: 6em; */
 	float: left;
 	font-weight: lighter;
@@ -247,6 +247,14 @@ div.footer {
 		padding-right: 10%;
 		padding-top: 1.25em;
 	}
+
+	.hleft{
+		margin-left: 10%;
+	}
+
+	.hright{
+		width: calc(100vw - 8em - 10%);
+	}
 }
 
 @media only screen and (orientation: portrait){
@@ -257,6 +265,13 @@ div.footer {
 		padding-left: 2%;
 		padding-right: 3%;
 		padding-top: 1.25em;
+	}
+
+	.hleft{
+		margin-left: 0%;
+	}
+	.hright{
+		width: calc(100vw - 8em - 0%);
 	}
 
 	date{
