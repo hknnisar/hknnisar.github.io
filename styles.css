@@ -207,8 +207,8 @@ div.footer {
 	border: none;
 	font-family: Lato;
 	font-weight: lighter;
-	padding-left: 0.5em;
-	padding-right: 0.5em;
+	padding-left: 0.1em;
+	padding-right: 0.1em;
   }
   
   .dropdown {
