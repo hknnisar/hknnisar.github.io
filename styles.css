@@ -54,6 +54,12 @@ html {
 	body {
 		background-color: white;
 		color: black;
+
+		/*background-image: url("./images/skyline_light.svg");
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: contain;
+		background-position: center bottom;*/
 		}
 	code {
 		font-family: Consolas,"courier new";
@@ -247,6 +253,8 @@ div.footer {
 		padding-left: 10%;
 		padding-right: 10%;
 		padding-top: 1.25em;
+		--width: 100%;
+		margin-bottom: calc(var(--width)/6 - 6rem);
 	}
 
 	.hleft{
@@ -266,6 +274,8 @@ div.footer {
 		padding-left: 2%;
 		padding-right: 3%;
 		padding-top: 1.25em;
+		--width: 100%;
+		margin-bottom: calc(var(--width)/6 - 6rem);
 	}
 
 	.hleft{
