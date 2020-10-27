@@ -77,9 +77,13 @@ html {
 		padding: 0.25em;
 		font-size: 0.9em;
 		}
-	div.footer img{
+	div.footer img.engineering {
 			max-width: 100%;
 			content: url("./images/skyline_light.svg")
+		}
+	div.footer img.elections {
+			max-width: 100%;
+			content: url("./images/2020_flag.svg")
 		}
 		
 	}
@@ -114,11 +118,15 @@ html {
 		padding: 0.25em;
 		font-size: 0.9em;
 		}
-	div.footer img{
+	div.footer img.engineering{
 		max-width: 100%;
 		content: url("./images/skyline_dark.svg")
 	}
-		
+	div.footer img.elections {
+		max-width: 100%;
+		content: url("./images/2020_flag.svg")
+	}
+	
 	}
 
 
