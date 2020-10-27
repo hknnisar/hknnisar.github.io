@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
   <url>
     <loc>http://harshnisar.com/</loc>
-    <lastmod>2020-09-11</lastmod>
+    <lastmod>2020-10-27</lastmod>
   </url>
   <url>
     <loc>http://harshnisar.com/index</loc>
-    <lastmod>2020-09-11</lastmod>
+    <lastmod>2020-10-27</lastmod>
   </url>
   <url>
     <loc>http://harshnisar.com/projects</loc>
@@ -15,6 +15,10 @@
   <url>
     <loc>http://harshnisar.com/engineering</loc>
     <lastmod>2020-09-11</lastmod>
+  </url>
+  <url>
+    <loc>http://harshnisar.com/writing</loc>
+    <lastmod>2020-10-27</lastmod>
   </url>
   <url>
     <loc>http://harshnisar.com/KiteRange</loc>
