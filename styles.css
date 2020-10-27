@@ -83,6 +83,12 @@ html {
 		}
 		
 	}
+	br {
+		content: "";
+		margin: 1em;
+		display: block;
+		font-size: 24%;
+	  }
   
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
