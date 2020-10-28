@@ -48,6 +48,14 @@ html {
 	height: 100%;
 	box-sizing: border-box;
   }
+
+  br {
+	content: "";
+	margin: 1em;
+	display: block;
+	font-size: 24%;
+  }
+
   
 
 @media (prefers-color-scheme: light) {
@@ -83,16 +91,11 @@ html {
 		}
 	div.footer img.elections {
 			max-width: 100%;
+			width: 100%;
 			content: url("./images/2020_flag.svg")
 		}
 		
 	}
-	br {
-		content: "";
-		margin: 1em;
-		display: block;
-		font-size: 24%;
-	  }
   
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
@@ -124,6 +127,7 @@ html {
 	}
 	div.footer img.elections {
 		max-width: 100%;
+		width: 100%;
 		content: url("./images/2020_flag.svg")
 	}
 	
