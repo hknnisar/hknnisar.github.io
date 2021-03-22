@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>KiteSwing</title>
+	<link rel="icon" href="./images/icon.png" type="image/icon type">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="canonical" href="https://harshnisar.com/KiteSwing" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta property="og:title" content="Harsh Nisar" />
+    <meta property="og:image" content="https://harshnisar.com/images/ogimage.png"/>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-171393756-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-171393756-1');
+	</script>
+
+
+</head>
+<body>
+	<div class="header">
+		<div class="hleft">
+			<a href="./index">
+			<img src="./images/photo.svg" alt="Harsh Nisar">
+		</a>
+		</div>
+		<div class="hright">
+			<div class="hrtop">
+				<a href="./index" title="Harsh Nisar">harsh<strong>nisar</strong></a>
+				<!-- harshnisar -->
+			</div>
+			<div class="hrbot">
+				<span>
+                    <a href="index">
+					HOME</a>
+				</span>
+				<span class="dropdown">
+					<button class="dropbtn"><a href="projects">
+						<u>PROJECTS</u>
+				</a></button>
+					<div class="dropdown-content">
+						<a href="KiteBase">KiteBase</a>
+						<a href="KiteRange">KiteRange</a>
+						<a href="KiteSwing">KiteSwing</a>
+						</div>
+				</span>
+				<span>
+					<strong> > </strong>
+				</span>
+				<span class="dropdown">
+					<button class="dropbtn">
+						<strong><u>KiteSwing</u></strong>
+				</button>
+					<div class="dropdown-content">
+						<a href="KiteSwing#Background">BACKGROUND</a>
+						<a href="KiteSwing#Download">DOWNLOAD</a>
+						<a href="KiteSwing#Workflow">WORKFLOW</a>
+						<a href="KiteSwing#Information">INFORMATION</a>
+						<a href="KiteSwing#Access">ACCESS</a>
+						</div>
+				</span>
+			</div>
+		</div>
+	</div>
+		
+	<div class="content">
+		
+		<article id="KiteSwing">
+		<h1>KiteSwing</h1>
+		<p>
+        	A light standalone autonomous trading module which takes positional trades.
+		</p>
+		<p id="Background">
+			<h2>Background</h2>
+			KiteSwing is a simple yet robust module that allows users who have minimal
+			knowledge about programming, Python or the KiteConnect API to get started with system
+			trading.
+			<br>
+			The module implements a proven trend following positional
+			strategy. Here is how it works: underlying's closing above or below a set of moving averages is traded to take a long or short position respectively.
+			<br>
+			In the interest of keeping full control in the hands of the trader, an ABORT
+			method has been implement to exit the strategy, at the user's discretion, while keeping the positions active. Check 
+			<a href="KiteSwing#Workflow"><u>workflow</u></a> below for more.
+		</p>
+		
+		<p id="Download">
+			<h2>Download</h2>
+			Visit the <a href="./projects#Download">
+			<u>Download</u>
+			</a>
+			section to get the setup script. Chose <code>(3) KiteBase & KiteSwing</code> during installation. You will need a secret code to install 
+			the package onto your system. Please contact me @harshnisar on <a href="https://twitter.com/harshnisar"><u>Twitter</u></a> or <a href="https://t.me/harshnisar"><u>Telegram</u></a> for the code.
+		</p>
+		
+		<p id="Workflow">
+			<h2>Workflow</h2>
+			KiteSwing has been built to require minimum commands to get going. KiteSwing uses <a href="./KiteBase"><u>KiteBase</u></a> as a dependency.
+			Simply follow the steps below:
+			<ol>
+				<li>
+					Import modules <br>
+					<code>>> from Instance import Instance</code>
+					<br>
+					<code>>> from Swing import MultiSwing</code>
+				</li>
+				<li>
+					Generate an Instance <br>
+					<code>>> I = Instance()</code>
+				</li>
+				<li>
+					Initiate the strategy<br>
+					<code>>> MS = MultiSwing(I,setups=[('NIFTY BANK')])</code><br>
+				</li>
+			</ol>
+			Done!<br>With these steps, your positional strategy is up and running. At the finish of the first candle, it will match you position with the theoritical position.
+			Then it will check for signals when each new candle is generated. It will trade signals a few moments after the candle is generated. Right before Closing Bell, it'll try to anticipate signals, and will premptively trade if it concludes there might be one.
+			<br>
+			If you are a new KiteConnect user, please start with the <code>headless</code> flag set to <code>False</code> so as to <a href="./KiteBase#First_Time_Auth"><u>manually authorize</u></a> KiteConnect to link to Kite.
+			<br>
+			See the <a href="#Information"><u>Information</u></a> section for more details.
+			<!-- <code>from sdf import sdd </code> -->
+			<br>
+		</p>
+
+		<p id="Information">
+			<h2>Information</h2>
+			<ol>
+				<li>
+					MultiSwing Module: The strategy is run by this.
+					<ul>
+						<li>
+							Range Object: For set of input parameters, like instrument, create an object with default arguements. Pass setups as a list of tuples.
+							Append <code>'_F'</code> to the scrip's tradingsymbol if you intend to generate signals on the underlying and trade future instrument, this is not required for index futures.
+							<br><code>MS = MultiSwing(I, setups=[('NIFTY 50'),('SBIN_F')])</code>
+						</li>
+						<li>
+							Interval: The candle duration
+							<br>
+							<code>MS = MultiSwing(I, setups=[('SBIN','15minute')])</code>
+						</li>
+						<li>
+							Averages: a string of EMAs, 'C' for close,'L' for low, 'L' for high followed by a number for the number of candles to take average for.
+							<br><code>MS = MultiSwing(I, setups=[('SBIN','15minute','C10,H20,L20')])</code>
+						</li>
+						<li>
+							Signals only: pass <code>True</code> to just get signals, an to trade on signals, else pass False.
+							<br><code>MS = MultiSwing(I, setups=[('SBIN','15minute','C10,H20,L20',False)])</code>
+						</li>
+						<li>
+							Quantity: pass the number of lots to trade.
+							<br><code>MS = MultiSwing(I, setups=[('SBIN','15minute','C10,H20,L20',False,300)])</code>
+						</li>
+						<li>
+							Previous Position: pass the actual position when initiating the strategy. Pass False if you are starting afresh, and if for some reason you a running the code while a position has already been taken, pass the position in terms on no. of lots.
+							<br><code>MS = MultiSwing(I, setups=[('SBIN','15minute','C10,H20,L20',False,300,50)])</code>
+						</li>
+						<li>
+							Rollover: on expiry day pass <code>False</code> if rollover is already done, so the module doesn't seek to rollover again when the strategy is initiated, else pass True
+							<br><code>MS = MultiSwing(I, setups=[('SBIN','15minute','C10,H20,L20',False,300,50,True)])</code>
+						</li>
+						<li>
+							Hours: Input Opening and Closing bell, (for special days):
+							<ul>
+								<li>
+									<code>start_time</code>: Opening Bell
+								</li>
+								<li>
+									<code>end_time</code>: Closing Bell
+								</li>
+							</ul>
+							<br><code>MS = MultiSwing(I, setups=[('SBIN','15minute','C10,H20,L20',False,300,50,True)], hours=('09:15','15:30'))</code>
+						</li>
+						<li>
+							Setups: The <code>setups</code> attribute stores a dictionary of active setups with the setup number.
+							<br>
+							<code>>> MS.setups</code> <br>
+							might return 
+							<br>
+							<code>
+								{0: ('NIFTY BANK', '15minute', 'C10,H20,L20', False, 1, False, True),<br>
+ 								 1: ('SBIN_F', '60minute', 'C25,C100,C200', False, 3, False, True)}
+							</code>
+						</li>
+						<li>
+							Restarting: In case for some unforeseen reason, if a session crashes, then pass the correct Previous Position and Rollover as discussed above when restarting the strategy.
+						</li>
+						<li>
+							Abort: To exit strategy, while no touching positions, call <code>abort</code>
+							<br><code>>> MS.abort()</code>
+						</li>
+					</ul>
+				</li>
+				
+			</ol>
+		</p>
+		<p id="Access">
+			<h2>Access</h2>
+			Check <a href="projects"><u>projects</u></a> for <a href="projects#Requirements"><u>Requirements</u></a>.
+			Presently KiteSwing isn't availably freely. If you are interested, send an <a href="mailto:harsh@harshnisar.com"><u>email</u></a> or contact me @harshnisar on <a href="https://twitter.com/harshnisar"><u>Twitter</u></a> or <a href="https://t.me/harshnisar"><u>Telegram</u></a> for access.
+		</p>
+		</article>
+	</div>
+	<div class="footer">
+		<br>
+		<br>
+	</div>
+
+</body>
+</html>
