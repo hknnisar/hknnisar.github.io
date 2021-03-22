@@ -137,32 +137,32 @@
 						<li>
 							Range Object: For set of input parameters, like instrument, create an object with default arguements. Pass setups as a list of tuples.
 							Append <code>'_F'</code> to the scrip's tradingsymbol if you intend to generate signals on the underlying and trade future instrument, this is not required for index futures.
-							<br><code>MS = MultiSwing(I, setups=[('NIFTY 50'),('SBIN_F')])</code>
+							<br><code>MS = MultiSwing(I, setups=[('NIFTY 50'), ('SBIN_F')])</code>
 						</li>
 						<li>
 							Interval: The candle duration
 							<br>
-							<code>MS = MultiSwing(I, setups=[('SBIN','15minute')])</code>
+							<code>MS = MultiSwing(I, setups=[('SBIN', '15minute')])</code>
 						</li>
 						<li>
 							Averages: a string of EMAs, 'C' for close,'L' for low, 'L' for high followed by a number for the number of candles to take average for.
-							<br><code>MS = MultiSwing(I, setups=[('SBIN','15minute','C10,H20,L20')])</code>
+							<br><code>MS = MultiSwing(I, setups=[('SBIN', '15minute', 'C10,H20,L20')])</code>
 						</li>
 						<li>
 							Signals only: pass <code>True</code> to just get signals, an to trade on signals, else pass False.
-							<br><code>MS = MultiSwing(I, setups=[('SBIN','15minute','C10,H20,L20',False)])</code>
+							<br><code>MS = MultiSwing(I, setups=[('SBIN', '15minute', 'C10,H20,L20', False)])</code>
 						</li>
 						<li>
 							Quantity: pass the number of lots to trade.
-							<br><code>MS = MultiSwing(I, setups=[('SBIN','15minute','C10,H20,L20',False,300)])</code>
+							<br><code>MS = MultiSwing(I, setups=[('SBIN', '15minute', 'C10,H20,L20', False, 300)])</code>
 						</li>
 						<li>
 							Previous Position: pass the actual position when initiating the strategy. Pass False if you are starting afresh, and if for some reason you a running the code while a position has already been taken, pass the position in terms on no. of lots.
-							<br><code>MS = MultiSwing(I, setups=[('SBIN','15minute','C10,H20,L20',False,300,50)])</code>
+							<br><code>MS = MultiSwing(I, setups=[('SBIN', '15minute', 'C10,H20,L20', False, 300, 50)])</code>
 						</li>
 						<li>
 							Rollover: on expiry day pass <code>False</code> if rollover is already done, so the module doesn't seek to rollover again when the strategy is initiated, else pass True
-							<br><code>MS = MultiSwing(I, setups=[('SBIN','15minute','C10,H20,L20',False,300,50,True)])</code>
+							<br><code>MS = MultiSwing(I, setups=[('SBIN', '15minute', 'C10,H20,L20', False, 300, 50, True)])</code>
 						</li>
 						<li>
 							Hours: Input Opening and Closing bell, (for special days):
@@ -174,7 +174,7 @@
 									<code>end_time</code>: Closing Bell
 								</li>
 							</ul>
-							<br><code>MS = MultiSwing(I, setups=[('SBIN','15minute','C10,H20,L20',False,300,50,True)], hours=('09:15','15:30'))</code>
+							<br><code>MS = MultiSwing(I, setups=[('SBIN', '15minute', 'C10,H20,L20', False, 300,50, True)], hours= ('09:15','15:30'))</code>
 						</li>
 						<li>
 							Setups: The <code>setups</code> attribute stores a dictionary of active setups with the setup number.
