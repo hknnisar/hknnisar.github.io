@@ -44,8 +44,10 @@
                         <strong><u>PROJECTS</u></strong>
                 </button>
 					<div class="dropdown-content">
-					  <a href="KiteRange">KiteRange</a>
-					  </div>
+						<a href="KiteBase">KiteBase</a>
+						<a href="KiteRange">KiteRange</a>
+						<a href="KiteSwing">KiteSwing</a>
+						</div>
 				</span>
 			</div>
 		</div>
@@ -57,8 +59,11 @@
 			I have been developing system trading modules for personal use since Summer of 2020.
 			<br>
 			<h1>Projects</h1>
-			I currently have two modules in <a href="projects#Deployment"><u>deployment</u></a>. They are currently deployed at a fraction of the planned capital and are being rejigged and escalated at every expiry.
+			I currently have three modules in <a href="#Deployment"><u>deployment</u></a>. They are currently deployed at a fraction of the planned capital and are being rejigged and escalated at every expiry.
 			<ul>
+				<li>
+					<a href="KiteBase" title="KiteBase"><strong><u>KiteBase</u></strong></a>: Manages the KiteConnect Instance and provides robust API access features to dependent modules.
+				</li>
 				<li>
 					<a href="KiteRange" title="KiteRange"><strong><u>KiteRange</u></strong></a>: Trades intraday range breakouts.
 				</li>
@@ -66,8 +71,110 @@
 					<strong>KiteSwing</strong>: Takes positional trendfollowing trades.
 				</li>
 			</ul>
-			Please go through the <a href="projects#Stages"><u>context</u></a> below before proceeding.
+			Please go through the <a href="#Stages"><u>context</u></a> below before proceeding.
 			<br>
+
+			<p id="Requirements">
+				<h2>Requirements</h2>
+				<ul>
+					<li><a href="https://zerodha.com/open-account">
+						<u>An account with Zerodha for equity trading</u></a></li>
+					<li><a href="https://developers.kite.trade/login">
+						<u>KiteConnect enabled</u></a>
+	
+					</li>
+					<li><a href="https://kite.trade/individuals">
+						<u>An activated App</u></a></li>
+					<li>Historical Data/Candles API subscription added-on</li>
+					<li>Python 3 installed, preferably with 
+						<a href="https://www.anaconda.com/products/individual#Downloads">
+						<u>Anaconda</u></a>
+						 for Windows users</li>
+					<li><a href="https://github.com/zerodhatech/pykiteconnect#installing-the-client">
+						<u>KiteConnect Python API</u></a>
+						 installed</li>
+					<li><a href="#GCP">
+						<u>Optional</u></a>: <a href="https://cloud.google.com/">
+						<u>GCP</u></a>
+						Account</li>
+				</ul>
+			</p>
+			<p id="Download">
+				<h2>Download</h2>
+				<a href="./download/setup.py" download="setup.py">
+				<u>Download the setup script</u>
+				</a>
+				to the installation directory and run it. Chose the modules you want to install. You will need a secret code to install 
+				the package onto your system. Please contact me @harshnisar on <a href="https://twitter.com/harshnisar"><u>Twitter</u></a> or <a href="https://t.me/harshnisar"><u>Telegram</u></a> for the code.
+			</p>
+			<p id="GCP">
+				<h2>GCP Setup</h2>
+				Since the codebase is so light, start with a minimal <a href="https://cloud.google.com/compute"><u>Compute Engine</u></a> Instance (<a href="https://cloud.google.com/compute/docs/machine-types"><u>f1-micro</u></a> should suffice). I prefer using the latest LTS Ubuntu minimal <a href="https://cloud.google.com/compute/docs/images#os-compute-support"><u>image</u></a> to boot from. Ensure the timezone is correct. <a href="KiteBase#Download"><u>Download</u></a> KiteBase on the instance.
+				<br>
+				Once KiteBase is installed, the user can treat the cloud instance as a local machine and carry on as if it is a local device. I rather suggest using the instance as a dumb box, with minimal input required from the user, that is turning the instance on/off. Meaning the user simply turns the instance on in the morning, sometime before the opening bell, then the KiteBase runs automatically at startup, for a set of predefined scrips, and after closing bell, the user shuts the instance down. This should happen with the option for the user to track KiteBase anytime the user wishes. So,
+				<ul>
+					<li>
+						Create a <code>run.py</code> script in the KiteBase working directory. This script should contain all the commands described in <a href="KiteBase#Workflow"><u>Workflow</u></a>, so for example <br>
+						<code>
+							from Instance import Instance <br>
+							from Range import Range <br>
+							I = Instance()<br>
+							infy = Range(I,'INFY')<br>
+							tcs = Range(I,'TCS',Q=5,define_time='09:35')
+						</code>
+					</li>
+					<li>
+						Create a <code>run.sh</code> bash script in the working directory which runs <code>run.py</code> in an interactive <a href="https://ipython.org/"><u>ipython</u></a><br>
+						<code>
+							#!/bin/bash -e <br>
+							ipython3 -i run.py
+						</code>
+					</li>
+					<li>
+						Create a <code>startup.sh</code> bash script which is run by <a href="https://man7.org/linux/man-pages/man5/crontab.5.html"><u>contrab</u></a> at startup to execute <code>run.sh</code> on a detached <a href="https://www.gnu.org/software/screen/manual/screen.html"><u>screen</u></a><br>
+						<code>
+							#!/bin/bash -e <br>
+							screen -d -m -S KiteBase ./run.sh
+						</code>
+					</li>
+					<li>
+						Finally add <code>startup.sh</code> to the contrab file. <br>
+						<code>
+							$ contrab -e
+						</code>  <br>
+						and add <code>@reboot /KiteBase-working-directory-/startup.sh</code> to the file, where <code>KiteBase-working-directory</code> is the working directory whre <code>startup.sh</code> is located
+					</li>
+					<li>
+						Done! Now anytime the user intends to see how the KiteBase execution is going on, simple resume the screen.  <br>
+						<code>
+							$ screen -r
+						</code>
+					</li>
+				</ul>
+				Since all user credentials are stored in an encrypted file in the workind directory, user input will always be required to decrypt that file at each log into the API. So the user needs to ssh into the instance, resume the screen and provide the password at every run.
+				
+			</p>
+			<p id="Information">
+				<h2>Information</h2>
+				
+						<a href="#Download"><u>Setup:</u></a> It will be ensured here that all <a href="#Requirements"><u>requirements</u></a> are met and the necessary items are installed. The setup will show any unmet requirements when it is done. Please ensure these are complete before proceeding to run the strategy.
+						<br>Here is a summary of what setup does:
+						<ul>
+							<li>
+								Dependencies: KiteBase uses a few libraries which are not a part of the <a href="https://docs.python.org/3/library/">python standary libraries</a>. If your system is missing a library, setup will add it to the list of unmet requirements.
+							</li> 
+							<li>
+								Installation Directory: Its best to install everything in its own directory. This will be the working directory from where the strategy should be run. Any required files will also be stored here.
+							</li>
+							<li>
+								Credentials: Logging into KiteConnect everyday is tedious. So at setup, all relevant credentials, including the Kite ClientID, password, PIN, API Key and API Secret are stored in a local encrypted <code>cred</code> file whose password is set during setup.
+							</li>
+							<li>
+								Chrome Driver: In inclination of convenience, web-scrapping is used to log into the API every morning which automates the login procedure using a headless Chrome browser. Please save a compatible version of <a href="https://chromedriver.chromium.org/downloads"><u>chromedriver</u></a> to the working directory. It goes without saying, Google Chrome must be installed on the system.
+							</li>
+						</ul>
+					
+
 			<h1 id="Stages">
 				Stages
 			</h1>
