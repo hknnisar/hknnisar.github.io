@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>KiteBase</title>
+	<link rel="icon" href="./images/icon.png" type="image/icon type">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="canonical" href="https://harshnisar.com/KiteBase" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta property="og:title" content="Harsh Nisar" />
+    <meta property="og:image" content="https://harshnisar.com/images/ogimage.png"/>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-171393756-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-171393756-1');
+	</script>
+
+
+</head>
+<body>
+	<div class="header">
+		<div class="hleft">
+			<a href="./index">
+			<img src="./images/photo.svg" alt="Harsh Nisar">
+		</a>
+		</div>
+		<div class="hright">
+			<div class="hrtop">
+				<a href="./index" title="Harsh Nisar">harsh<strong>nisar</strong></a>
+				<!-- harshnisar -->
+			</div>
+			<div class="hrbot">
+				<span>
+                    <a href="index">
+					HOME</a>
+				</span>
+				<span class="dropdown">
+					<button class="dropbtn"><a href="projects">
+						<u>PROJECTS</u>
+				</a></button>
+					<div class="dropdown-content">
+						<a href="KiteBase">KiteBase</a>
+						<a href="KiteRange">KiteRange</a>
+						<a href="KiteSwing">KiteSwing</a>
+						</div>
+				</span>
+				<span>
+					<strong> > </strong>
+				</span>
+				<span class="dropdown">
+					<button class="dropbtn">
+						<strong><u>KiteBase</u></strong>
+				</button>
+					<div class="dropdown-content">
+						<a href="KiteBase#Background">BACKGROUND</a>
+						<a href="KiteBase#Setup">SETUP</a>
+						<a href="KiteBase#Workflow">WORKFLOW</a>
+						<a href="KiteBase#Information">INFORMATION</a>
+						<a href="KiteBase#Access">ACCESS</a>
+						</div>
+				</span>
+			</div>
+		</div>
+	</div>
+		
+	<div class="content">
+		
+		<article id="KiteBase">
+		<h1>KiteBase</h1>
+		<p>
+        	A module that manages the KiteConnect instance and provides robust API features to dependent modules.
+		</p>
+		<p id="Background">
+			<h2>Background</h2>
+			KiteBase is a core module which manages login and routes API requests in a robust manner. 
+			<br>
+			The module implements common core methods, and stores common attributes used widely in dependent modules.
+			<br>
+			The system automatically exits at a user-prescribed time. Check 
+			<a href="KiteBase#Workflow"><u>workflow</u></a> below for more.
+		</p>
+
+		<p id="Download">
+			<h2>Download</h2>
+			Visit the <a href="./projects#Download"><u>Download</u></a> section to get the setup script. Chose <code>(1) KiteBase</code> during installation. You will need a secret code to install 
+			the package onto your system. Please contact me @harshnisar on <a href="https://twitter.com/harshnisar"><u>Twitter</u></a> or <a href="https://t.me/harshnisar"><u>Telegram</u></a> for the code.
+		</p>
+		
+		<p id="Workflow">
+			<h2>Workflow</h2>
+			KiteBase lets the user log into a KiteConnect session.
+			Simply follow the steps below:
+			<ol>
+				<li>
+					Import modules <br>
+					<code>>> from Instance import Instance</code>
+				</li>
+				<li>
+					Generate an Instance <br>
+					<code>>> I = Instance()</code>
+				</li>
+			</ol>
+			Done!<br>The user has been logged in. The scrip masters have been loaded as attributes. Telegram Bot Messaging methods have been made accsible, if selected. Robust KiteConnect API access methods are now available for use.
+			<br>
+			If you are a new KiteConnect user, please start with the <code>headless</code> flag set to <code>False</code> so as to <a href="KiteBase#First_Time_Auth"><u>manually authorize</u></a> KiteConnect to link to Kite.
+			<br>
+			See the <a href="KiteBase#Information"><u>Information</u></a> section for more details.
+			<!-- <code>from sdf import sdd </code> -->
+			<br>
+		</p>
+
+		<p id="Information">
+			<h2>Information</h2>
+					Instance Module: KiteConnect API will be logged into and the session's instance will be stored here.
+					<ul>
+						<li>
+							Login: Credentials stored during setup will be used to log-in to your app on KiteConnect.
+							In order to modify these credentials, use the <code>modify_cred</code> arguement and provide the updated values.
+							<br>
+							<code>>> I = Instance(modify_cred=True)</code>
+						</li>
+						<li id="First_Time_Auth">
+							First Time Authorization: For a new KiteConnect user, Zerodha asks for one time authorization to enable linking Kite and KiteConnect. To do this, launch with the <code>headless</code> flag set to <code>False</code>
+							<br>
+							<code>>> I = Instance(headless=False)</code>
+							After ever auto-action in the browser, press return in the python console for the next action, except for the authorization part, where the user needs to manually click on Authorize.
+						</li>
+						<li>
+							Scrip Master: At login, a master scrip file is downloaded and saved. Because of this login will take a few seconds depending upon your connection. Check the master to see all available instruments for the day.
+							<br>
+							<code>>> I.master</code>
+						</li>
+						<li>
+							Kite: All <a href="https://kite.trade/docs/pykiteconnect/v3/"><u>API calls to KiteConnect</u></a> are made thru the <code>kite</code> attribute of <code>Instance</code>. For example:<br> 
+							<code>>> I.kite.ohlc('NSE:INFY')</code>
+						</li>
+						<li>
+							ReKite: There is a restriction to the number of simultaneous requests in KiteConnect. When the number of these requests exceed the limit, the API throws an exception, which breaks a thread if not handled correctly. ReKite is a wrapper around Kite which makes all those API calls for you but if an exception is raised indicating exhaustion of simultaneous requests, it waits a bit and retries till the API successfully returns without exception. 
+							
+							So instead of calling kite methods thru kite, one can call them thru rekite.<br>
+							<code>>> I.rekite.ohlc('NSE:INFY')</code>
+						</li>
+					</ul>
+
+		</p>
+		<p id="Access">
+			<h2>Access</h2>
+			Check <a href="projects"><u>projects</u></a> for <a href="projects#Requirements"><u>Requirements</u></a>.
+			Presently KiteBase isn't availably freely. If you are interested, send an <a href="mailto:harsh@harshnisar.com"><u>email</u></a> or contact me @harshnisar on <a href="https://twitter.com/harshnisar"><u>Twitter</u></a> or <a href="https://t.me/harshnisar"><u>Telegram</u></a> for access.
+		</p>
+		</article>
+	</div>
+	<div class="footer">
+		<br>
+		<br>
+	</div>
+
+</body>
+</html>
