@@ -12,6 +12,7 @@ import zipfile
 import requests
 import py_compile
 import time
+import subprocess
 
 task_summary = []
 
@@ -113,13 +114,79 @@ try:
 
     #chromedriver
     if not os.path.isfile(os.getcwd()+bs+'chromedriver.exe' if system == 'nt' else os.getcwd()+bs+'chromedriver'):
-        print('Please fetch a compatible chromedriver from https://chromedriver.chromium.org/downloads\n')
-        time.sleep(1)
-        task_summary += ['Please fetch a compatible chromedriver from https://chromedriver.chromium.org/downloads']
+        if system == 'nt':
+            print('Please fetch a compatible chromedriver from https://chromedriver.chromium.org/downloads\n')
+            time.sleep(1)
+            task_summary += ['Please fetch a compatible chromedriver from https://chromedriver.chromium.org/downloads']
+        else:
+            print('Fetching chromedriver from https://chromedriver.chromium.org/downloads')
+            time.sleep(1)
+        
+            try:
+                c2 = "google-chrome --version"
+                p2 = subprocess.Popen(c2.split(), stdout=subprocess.PIPE)
+                o2, e2= p2.communicate()
+                ans2 = str(o2)
+                version = int(ans2.split(' ')[2][:2])
+
+                url = 'https://chromedriver.storage.googleapis.com/'
+                response = requests.get(url)
+                content=str(response.content)
+                
+                # version = '89'
+                cdr_v = ''
+                content = content.split('Contents')
+                for item in content:
+                    try:
+                        interest = item.split('Key')[1].split('>')[1].split('<')[0].split('/')
+                        if interest[1] == 'chromedriver_linux64.zip':
+                            # print(interest[0])
+                            if interest[0].split('.')[0] == str(version):
+                                cdr_v = interest[0]
+                    except IndexError:
+                        pass
+                cdr_url = 'https://chromedriver.storage.googleapis.com/%s/chromedriver_linux64.zip'%(cdr_v)
+                r = requests.get(cdr_url, allow_redirects=True)
+                open('chromedriver.zip', 'wb').write(r.content)
+                with zipfile.ZipFile(directory+bs+'chromedriver.zip', 'r') as zip_ref:
+                    zip_ref.extractall(directory)
+                    zip_ref.close()
+                os.chmod('chromedriver',0o777)
+                os.remove(directory+bs+'chromedriver.zip')
+                print('DONE! Compatible chromedriver downloaded\n')
+            except:
+                print('Please fetch a compatible chromedriver from https://chromedriver.chromium.org/downloads\n')
+                time.sleep(1)
+                task_summary += ['Please fetch a compatible chromedriver from https://chromedriver.chromium.org/downloads']
+        
+        
     else:
-        print('Please ensure the chromedriver version is compatible with installed Chrome version\n')
-        time.sleep(1)
-        task_summary += ['Please ensure the chromedriver version is compatible with installed Chrome version']
+        if system == 'nt':
+            print('Please ensure the chromedriver version is compatible with installed Chrome version\n')
+            time.sleep(1)
+            task_summary += ['Please ensure the chromedriver version is compatible with installed Chrome version']
+        else:
+            try:
+                c1 = "./chromedriver -version"
+                c2 = "google-chrome --version"
+                p1 = subprocess.Popen(c1.split(), stdout=subprocess.PIPE)
+                o1, e1= p1.communicate()
+                p2 = subprocess.Popen(c2.split(), stdout=subprocess.PIPE)
+                o2, e2= p2.communicate()
+                ans1 = str(o1)
+                ans2 = str(o2)
+                ans1 = int(ans1.split(' ')[1][:2])
+                ans2 = int(ans2.split(' ')[2][:2])
+                if ans1 == ans2:
+                    print('DONE! chromedriver vesion matched with installed Google Chrome version, v%d\n'%(ans1))
+                else:
+                    print('NOTE: chromedriver v%d installed, while Google Chrome v%d installed, download %d chromedriver\n'%(ans1,ans2,ans2))
+                    time.sleep(1)
+                    task_summary += ['Please download chromedriver v%d'%(ans2)]
+            except:
+                print('Please ensure the chromedriver version is compatible with installed Chrome version\n')
+                time.sleep(1)
+                task_summary += ['Please ensure the chromedriver version is compatible with installed Chrome version']
     
     #credentials
     if os.path.isfile(directory+bs+'cred'):
