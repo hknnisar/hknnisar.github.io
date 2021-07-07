@@ -100,6 +100,8 @@ try:
         with zipfile.ZipFile(directory+bs+thefile, 'r') as zip_ref:
             zip_ref.extractall(directory,pwd=bytes(getpass.getpass('Please give secret code to install '+thefile[:-4]+':'),'utf-8'))
             files = zipfilelist[thefile]
+            if 'run.sh' in files:
+                files.remove('run.sh')
             py_compile.main(files)
             for file in files:
                 os.remove(directory+bs+file) 
@@ -192,12 +194,12 @@ try:
     if os.path.isfile(directory+bs+'cred'):
         answer = input('Proceed with the credentials found on the system?: (Y/N) ')
         #if you want to change password
-        re_encrypt = input('Re-encrypt?')
+        re_encrypt = input('Re-encrypt? ')
         if re_encrypt in ['Y','y']:
             os.system('openssl enc -in cred -out cred.dat -d -pbkdf2 -k %s'%(getpass.getpass('Password: ')))
             os.remove(directory+bs+'cred')
             os.system('openssl enc -aes-256-cbc -pbkdf2 -iter 20000 -in cred.dat -out cred -k %s'%(getpass.getpass('Password: ')))
-        os.remove(directory+bs+'cred.dat')
+            os.remove(directory+bs+'cred.dat')
         if answer in ['n','N']:
             os.remove(directory+bs+'cred')
         else:
@@ -206,7 +208,7 @@ try:
             with open(directory+bs+'cred.dat') as json_file: 
                 cred = json.load(json_file) 
             os.remove('cred.dat')
-            client_id = cred['client_id']
+            client_id = cred['cliend_id']
     else:
         answer = 'n'
     if answer in ['N','n']:
@@ -236,11 +238,13 @@ try:
     # except:
     #     print('Please install all dependencies')
     
-    with open('run.sh','w') as f:
+    with open('run.sh','r') as f:
         content = f.read()
-    content.replace('__cliend_id__',client_id)
-    content.replace('__password__',password)
-    f.write(content)
+    f.close()
+    content = content.replace('__client_id__',client_id)
+    content = content.replace('__password__',password)
+    with open('run.sh','w') as f:
+        f.write(content)
     f.close()
     
     if len(task_summary) > 0:
