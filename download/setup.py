@@ -246,6 +246,8 @@ try:
     with open('run.sh','w') as f:
         f.write(content)
     f.close()
+    os.chmod('run.sh',0o777)
+
     
     if len(task_summary) > 0:
         print('\n'+'__'*40+'\nDONE! You are almost all set! Please complete the following tasks before running')
