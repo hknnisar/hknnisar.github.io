@@ -59,7 +59,7 @@ while install_type not in ['1','2','3','4']:
     install_type = input('Not a valid option\nWhat do you want to install?\n (1) KiteBase\n (2) KiteBase & KiteRange\n (3) KiteBase & KiteSwing\n (4) All the above\nResponse: ')
 
 
-filelist = {'1':['fno_calendar.pyc','Instance.pyc'],'2':['fno_calendar.pyc','Range.pyc','Instance.pyc'],'3':['fno_calendar.pyc','Swing.pyc','Container.pyc','Instance.pyc'],'4':['fno_calendar.pyc','Range.pyc','Instance.pyc','Swing.pyc','Container.pyc']}
+filelist = {'1':['fno_calendar.pyc','Instance.pyc','run.sh'],'2':['fno_calendar.pyc','Range.pyc','Instance.pyc','run.sh'],'3':['fno_calendar.pyc','Swing.pyc','Container.pyc','Instance.pyc','run.sh'],'4':['fno_calendar.pyc','Range.pyc','Instance.pyc','Swing.pyc','Container.pyc','run.sh']}
 for file in os.listdir():
         if file in filelist[install_type]:
             os.remove(directory+bs+file)
@@ -93,7 +93,7 @@ time.sleep(1)
 #     os.mkdir(directory+'\\__pycache__')
 
 ziplist = {'1':['KiteBase.zip'],'2':['KiteBase.zip','KiteRange.zip'],'3':['KiteBase.zip','KiteSwing.zip'],'4':['KiteBase.zip','KiteRange.zip','KiteSwing.zip']}
-zipfilelist = {'KiteBase.zip':['Instance.py','fno_calendar.py'],'KiteRange.zip':['Range.py'],'KiteSwing.zip':['Swing.py','Container.py']}
+zipfilelist = {'KiteBase.zip':['Instance.py','fno_calendar.py','run.sh'],'KiteRange.zip':['Range.py'],'KiteSwing.zip':['Swing.py','Container.py']}
 
 try:
     for thefile in ziplist[install_type]:
@@ -191,6 +191,7 @@ try:
     #credentials
     if os.path.isfile(directory+bs+'cred'):
         answer = input('Proceed with the credentials found on the system?: (Y/N) ')
+        #if you want to change password
         re_encrypt = input('Re-encrypt?')
         if re_encrypt in ['Y','y']:
             os.system('openssl enc -in cred -out cred.dat -d -pbkdf2 -k %s'%(getpass.getpass('Password: ')))
@@ -199,6 +200,13 @@ try:
         os.remove(directory+bs+'cred.dat')
         if answer in ['n','N']:
             os.remove(directory+bs+'cred')
+        else:
+            password = getpass.getpass("Please provide credentials password to fetch Client ID: ")
+            os.system('openssl enc -d -aes-256-cbc -pbkdf2 -iter 20000 -in cred -out cred.dat -k %s'%(password))
+            with open(directory+bs+'cred.dat') as json_file: 
+                cred = json.load(json_file) 
+            os.remove('cred.dat')
+            client_id = cred['client_id']
     else:
         answer = 'n'
     if answer in ['N','n']:
@@ -217,7 +225,8 @@ try:
         with open(os.getcwd()+bs+'cred.dat','w') as json_file:
             json.dump({'api_key':api_key,'cliend_id':client_id,'client_pass':client_pass,'client_pin':client_pin,'api_secret':api_secret},json_file)
         
-        os.system('openssl enc -aes-256-cbc -pbkdf2 -iter 20000 -in cred.dat -out cred -k  %s'%(getpass.getpass('Please set a password for encryption: ')))
+        password = getpass.getpass('Please set a password for encryption of credentials: ')
+        os.system('openssl enc -aes-256-cbc -pbkdf2 -iter 20000 -in cred.dat -out cred -k  %s'%(password))
         os.remove(directory+bs+'cred.dat')
     # task_summary += ['After importing Range, call Range.help() to get an introduction']
     # print('__'*40+'\nHere is a short introduction on how to use the Range module')
@@ -226,6 +235,14 @@ try:
     #     getattr(_temp,'Range').help()
     # except:
     #     print('Please install all dependencies')
+    
+    with open('run.sh','w') as f:
+        content = f.read()
+    content.replace('__cliend_id__',client_id)
+    content.replace('__password__',password)
+    f.write(content)
+    f.close()
+    
     if len(task_summary) > 0:
         print('\n'+'__'*40+'\nDONE! You are almost all set! Please complete the following tasks before running')
         time.sleep(1)
@@ -242,7 +259,7 @@ except Exception as e:
     print('\nTo get a secret code please contact me on Telegram or Twitter @harshnisar or email me at harsh@harshnisar.com')
     time.sleep(1)
     for file in os.listdir():
-        if file in ['fno_calendar.pyc','Range.pyc','Instance.pyc','fno_calendar.py','Range.py','Instance.py','Swing.pyc','Container.pyc','Swing,py','Container.py']:
+        if file in ['fno_calendar.pyc','Range.pyc','Instance.pyc','fno_calendar.py','Range.py','Instance.py','Swing.pyc','Container.pyc','Swing,py','Container.py','run.sh']:
             os.remove(directory+bs+file)
     for thefile in ziplist[install_type]:
         if os.path.isfile(directory+bs+thefile):
