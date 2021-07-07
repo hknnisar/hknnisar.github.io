@@ -193,9 +193,9 @@ try:
         answer = input('Proceed with the credentials found on the system?: (Y/N) ')
         re_encrypt = input('Re-encrypt?')
         if re_encrypt in ['Y','y']:
-            os.system('openssl enc -in cred -out cred.dat -d -aes256 -k %s'%(getpass.getpass('Password: ')))
+            os.system('openssl enc -in cred -out cred.dat -d -pbkdf2 -k %s'%(getpass.getpass('Password: ')))
             os.remove(directory+bs+'cred')
-            os.system('openssl enc -in cred.dat -out cred -e -pbkdf2 -k %s'%(getpass.getpass('Password: ')))
+            os.system('openssl enc -aes-256-cbc -pbkdf2 -iter 20000 -in cred.dat -out cred -k %s'%(getpass.getpass('Password: ')))
         os.remove(directory+bs+'cred.dat')
         if answer in ['n','N']:
             os.remove(directory+bs+'cred')
@@ -217,7 +217,7 @@ try:
         with open(os.getcwd()+bs+'cred.dat','w') as json_file:
             json.dump({'api_key':api_key,'cliend_id':client_id,'client_pass':client_pass,'client_pin':client_pin,'api_secret':api_secret},json_file)
         
-        os.system('openssl enc -in cred.dat -out cred -e -pbkdf2 -k %s'%(getpass.getpass('Please set a password for encryption: ')))
+        os.system('openssl enc -aes-256-cbc -pbkdf2 -iter 20000 -in cred.dat -out cred -k  %s'%(getpass.getpass('Please set a password for encryption: ')))
         os.remove(directory+bs+'cred.dat')
     # task_summary += ['After importing Range, call Range.help() to get an introduction']
     # print('__'*40+'\nHere is a short introduction on how to use the Range module')
