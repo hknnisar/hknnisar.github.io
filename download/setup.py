@@ -290,3 +290,7 @@ except Exception as e:
     for thefile in ziplist[install_type]:
         if os.path.isfile(directory+bs+thefile):
             os.remove(directory+bs+thefile)
+    if not run_from_server:
+        if os.path.isfile(directory+bs+'_run.sh'):
+            os.rename(directory+bs+'_run.sh',directory+bs+'run.sh')
+
