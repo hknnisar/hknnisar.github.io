@@ -128,7 +128,8 @@ try:
         
     if not run_from_server:
         os.remove(directory+bs+'run.sh')
-        os.rename(directory+bs+'_run.sh',directory+bs+'run.sh')
+        if os.path.isfile(directory+bs+'_run.sh'):
+            os.rename(directory+bs+'_run.sh',directory+bs+'run.sh')
         
     print('DONE! Modules successfully installed\n')
     time.sleep(1)
