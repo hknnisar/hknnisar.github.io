@@ -58,10 +58,21 @@ install_type = input('What do you want to install?\n (1) KiteBase\n (2) KiteBase
 while install_type not in ['1','2','3','4']:
     install_type = input('Not a valid option\nWhat do you want to install?\n (1) KiteBase\n (2) KiteBase & KiteRange\n (3) KiteBase & KiteSwing\n (4) All the above\nResponse: ')
 
+#runfiles from server?
+run_from_server = input('Do you want to fetch runfiles from the server? (Y/N) ')
+if run_from_server in ['Y','y']:
+    run_from_server = True
+else:
+    run_from_server = False
 
 filelist = {'1':['fno_calendar.pyc','Instance.pyc','run.sh'],'2':['fno_calendar.pyc','Range.pyc','Instance.pyc','run.sh'],'3':['fno_calendar.pyc','Swing.pyc','Container.pyc','Instance.pyc','run.sh'],'4':['fno_calendar.pyc','Range.pyc','Instance.pyc','Swing.pyc','Container.pyc','run.sh']}
-for file in os.listdir():
+if run_from_server:
+    for file in os.listdir():
         if file in filelist[install_type]:
+            os.remove(directory+bs+file)
+else:
+    for file in os.listdir():
+        if (file in filelist[install_type]) & (file != 'run.sh'):
             os.remove(directory+bs+file)
 
 print('OKAY, Fetching latest modules...')
@@ -96,6 +107,9 @@ ziplist = {'1':['KiteBase.zip'],'2':['KiteBase.zip','KiteRange.zip'],'3':['KiteB
 zipfilelist = {'KiteBase.zip':['Instance.py','fno_calendar.py','run.sh'],'KiteRange.zip':['Range.py'],'KiteSwing.zip':['Swing.py','Container.py']}
 
 try:
+    if not run_from_server:
+        if os.path.isfile(directory+bs+'run.sh'):
+            os.rename(directory+bs+'run.sh',directory+bs+'_run.sh') #rename existing runfile
     for thefile in ziplist[install_type]:
         with zipfile.ZipFile(directory+bs+thefile, 'r') as zip_ref:
             zip_ref.extractall(directory,pwd=bytes(getpass.getpass('Please give secret code to install '+thefile[:-4]+':'),'utf-8'))
@@ -109,7 +123,12 @@ try:
             for file in os.listdir(directory+bs+pycache):
                 os.rename(directory+bs+pycache+bs+file,directory+bs+file.split('.')[0]+'.pyc')
             zip_ref.close()
+        
         os.remove(directory+bs+thefile)
+        
+    if not run_from_server:
+        os.remove(directory+bs+'run.sh')
+        os.rename(directory+bs+'_run.sh',directory+bs+'run.sh')
         
     print('DONE! Modules successfully installed\n')
     time.sleep(1)
@@ -237,16 +256,16 @@ try:
     #     getattr(_temp,'Range').help()
     # except:
     #     print('Please install all dependencies')
-    
-    with open('run.sh','r') as f:
-        content = f.read()
-    f.close()
-    content = content.replace('__client_id__',client_id)
-    content = content.replace('__password__',password)
-    with open('run.sh','w') as f:
-        f.write(content)
-    f.close()
-    os.chmod('run.sh',0o777)
+    if run_from_server:
+        with open('run.sh','r') as f:
+            content = f.read()
+        f.close()
+        content = content.replace('__client_id__',client_id)
+        content = content.replace('__password__',password)
+        with open('run.sh','w') as f:
+            f.write(content)
+        f.close()
+        os.chmod('run.sh',0o777)
 
     
     if len(task_summary) > 0:
