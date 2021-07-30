@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+f# -*- coding: utf-8 -*-
 """
 Created on Sat May 30 14:23:49 2020
 
@@ -214,12 +214,12 @@ try:
     if os.path.isfile(directory+bs+'cred'):
         answer = input('Proceed with the credentials found on the system?: (Y/N) ')
         #if you want to change password
-        re_encrypt = input('Re-encrypt? ')
-        if re_encrypt in ['Y','y']:
-            os.system('openssl enc -in cred -out cred.dat -d -pbkdf2 -k %s'%(getpass.getpass('Password: ')))
-            os.remove(directory+bs+'cred')
-            os.system('openssl enc -aes-256-cbc -pbkdf2 -iter 20000 -in cred.dat -out cred -k %s'%(getpass.getpass('Password: ')))
-            os.remove(directory+bs+'cred.dat')
+        # re_encrypt = input('Re-encrypt? ')
+        # if re_encrypt in ['Y','y']:
+        #     os.system('openssl enc -in cred -out cred.dat -d -pbkdf2 -k %s'%(getpass.getpass('Password: ')))
+        #     os.remove(directory+bs+'cred')
+        #     os.system('openssl enc -aes-256-cbc -pbkdf2 -iter 20000 -in cred.dat -out cred -k %s'%(getpass.getpass('Password: ')))
+        #     os.remove(directory+bs+'cred.dat')
         if answer in ['n','N']:
             os.remove(directory+bs+'cred')
         else:
