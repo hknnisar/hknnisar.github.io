@@ -111,7 +111,13 @@
 				<h2>GCP Setup</h2>
 				Since the codebase is so light, start with a minimal <a href="https://cloud.google.com/compute"><u>Compute Engine</u></a> Instance (<a href="https://cloud.google.com/compute/docs/machine-types"><u>f1-micro</u></a> should suffice). I prefer using the latest LTS Ubuntu minimal <a href="https://cloud.google.com/compute/docs/images#os-compute-support"><u>image</u></a> to boot from. Ensure the timezone is correct. <a href="KiteBase#Download"><u>Download</u></a> KiteBase on the instance.
 				<br>
-				Once KiteBase is installed, the user can treat the cloud instance as a local machine and carry on as if it is a local device. I rather suggest using the instance as a dumb box, with minimal input required from the user, that is turning the instance on/off. Meaning the user simply turns the instance on in the morning, sometime before the opening bell, then the KiteBase runs automatically at startup, for a set of predefined scrips, and after closing bell, the user shuts the instance down. This should happen with the option for the user to track KiteBase anytime the user wishes. So,
+				Once KiteBase is installed, the user can treat the cloud instance as a local machine and carry on as if it is a local device. I rather suggest using the instance as a dumb box, with zero input required from the user. This can be done using <a href="https://cloud.google.com/compute/docs/instances/schedule-instance-start-stop"><u>Instance Schedule</u></a>.
+				<br>
+				Create a daily repeating schedule which starts an hour before opening bell and stops a few minutes after closing bell and attach the Schedule to your VM Instance. You will need to create an <code>Instance-Start-Stop-Role</code> with ID <code>CustomRole221</code> generally available with the following permissions: <code>compute.instances.start</code> & <code>compute.instances.stop</code> which can be searched by filtering for <code>Compute Instance Admin (v1)</code>. This Role will need be added to Google Provided Role Grants in IAM of the form <code>service-PROJECT_NUMBER@compute-system.iam.gserviceaccount.com</code>. This bit of setup will ensure a smooth auto start-stop schedule for your VM.
+				<!-- https://rominirani.com/hands-on-guide-to-scheduling-vm-instances-to-start-and-stop-a079a50e16c6 -->
+				<br>
+				Further, since <a href="https://support.zerodha.com/category/your-zerodha-account/login-credentials/login-credentials-of-trading-platforms/articles/time-based-otp-setup"><u>2FA</u></a> is mandatory, KiteBase performs server side gymnastics to ensure TOTP Authentication is not a barrier for automation. For this purpose, a <code>flask</code> Network Tag needs to be added to your VM Instance. A new firewall rule (in VPC Network) targeting specified tag <code>flask</code> filtering source IP ranges <code>0.0.0.0/0</code> at TCP Port <code>5000</code> needs to be created. 
+				<!-- https://pythonise.com/series/learning-flask/deploy-a-flask-app-nginx-uwsgi-virtual-machine -->
 				<ul>
 					<li>
 						Create a <code>run.py</code> script in the KiteBase working directory. This script should contain all the commands described in <a href="KiteBase#Workflow"><u>Workflow</u></a>, so for example <br>
@@ -170,7 +176,7 @@
 								Credentials: Logging into KiteConnect everyday is tedious. So at setup, all relevant credentials, including the Kite ClientID, password, PIN, API Key and API Secret are stored in a local encrypted <code>cred</code> file whose password is set during setup.
 							</li>
 							<li>
-								Chrome Driver: In inclination of convenience, web-scrapping is used to log into the API every morning which automates the login procedure using a headless Chrome browser. Please save a compatible version of <a href="https://chromedriver.chromium.org/downloads"><u>chromedriver</u></a> to the working directory. It goes without saying, Google Chrome must be installed on the system.
+								Chrome Driver: In inclination of convenience, web-scrapping is used to log into the API every morning which automates the login procedure using a headless Chrome browser. Please save a compatible version of <a href="https://chromedriver.chromium.org/downloads"><u>chromedriver</u></a> with execute permissions to the working directory. It goes without saying, Google Chrome must be installed on the system.
 							</li>
 						</ul>
 					
