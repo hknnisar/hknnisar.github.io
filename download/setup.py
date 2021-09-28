@@ -65,7 +65,7 @@ if run_from_server in ['Y','y']:
 else:
     run_from_server = False
 
-filelist = {'1':['fno_calendar.pyc','Instance.pyc','run.sh'],'2':['fno_calendar.pyc','Range.pyc','Instance.pyc','run.sh'],'3':['fno_calendar.pyc','Swing.pyc','Container.pyc','Instance.pyc','run.sh'],'4':['fno_calendar.pyc','Range.pyc','Instance.pyc','Swing.pyc','Container.pyc','run.sh']}
+filelist = {'1':['fno_calendar.pyc','Instance.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],'2':['fno_calendar.pyc','Range.pyc','Instance.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],'3':['fno_calendar.pyc','Swing.pyc','Container.pyc','Instance.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],'4':['fno_calendar.pyc','Range.pyc','Instance.pyc','Swing.pyc','Container.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css']}
 if run_from_server:
     for file in os.listdir():
         if file in filelist[install_type]:
@@ -104,7 +104,7 @@ time.sleep(1)
 #     os.mkdir(directory+'\\__pycache__')
 
 ziplist = {'1':['KiteBase.zip'],'2':['KiteBase.zip','KiteRange.zip'],'3':['KiteBase.zip','KiteSwing.zip'],'4':['KiteBase.zip','KiteRange.zip','KiteSwing.zip']}
-zipfilelist = {'KiteBase.zip':['Instance.py','fno_calendar.py','run.sh'],'KiteRange.zip':['Range.py'],'KiteSwing.zip':['Swing.py','Container.py']}
+zipfilelist = {'KiteBase.zip':['Instance.py','fno_calendar.py','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],'KiteRange.zip':['Range.py'],'KiteSwing.zip':['Swing.py','Container.py']}
 
 try:
     if not run_from_server:
@@ -114,8 +114,12 @@ try:
         with zipfile.ZipFile(directory+bs+thefile, 'r') as zip_ref:
             zip_ref.extractall(directory,pwd=bytes(getpass.getpass('Please give secret code to install '+thefile[:-4]+':'),'utf-8'))
             files = zipfilelist[thefile]
-            if 'run.sh' in files:
-                files.remove('run.sh')
+            remove_files = ['run.sh','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css']
+            for item in remove_files:
+                try:
+                    files.remove(item)
+                except:
+                    pass
             py_compile.main(files)
             for file in files:
                 os.remove(directory+bs+file) 
@@ -285,7 +289,7 @@ except Exception as e:
     print('\nTo get a secret code please contact me on Telegram or Twitter @harshnisar or email me at harsh@harshnisar.com')
     time.sleep(1)
     for file in os.listdir():
-        if file in ['fno_calendar.pyc','Range.pyc','Instance.pyc','fno_calendar.py','Range.py','Instance.py','Swing.pyc','Container.pyc','Swing,py','Container.py','run.sh']:
+        if file in ['fno_calendar.pyc','Range.pyc','Instance.pyc','fno_calendar.py','Range.py','Instance.py','Swing.pyc','Container.pyc','Swing,py','Container.py','run.sh','app.pyc','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css']:
             os.remove(directory+bs+file)
     for thefile in ziplist[install_type]:
         if os.path.isfile(directory+bs+thefile):
