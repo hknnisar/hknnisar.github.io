@@ -104,6 +104,9 @@ elif install_type=='5':
     url = 'https://hknnisar.github.io/download/KiteSwing.zip'
     r = requests.get(url, allow_redirects=True)
     open('KiteSwing.zip', 'wb').write(r.content)
+    url = 'https://hknnisar.github.io/download/WeSFuT.zip'
+    r = requests.get(url, allow_redirects=True)
+    open('WeSFuT.zip', 'wb').write(r.content)
 
 print('DONE! Successfully fetched latest modules\n')
 time.sleep(1)
