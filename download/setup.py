@@ -29,7 +29,7 @@ time.sleep(1)
 
 print('\nChecking dependencies...')
 time.sleep(1)
-dependencies = ['kiteconnect','pandas','selenium','time','threading','urllib','requests','random','datetime','json','os','getpass','zipfile','flask']
+dependencies = ['kiteconnect','pandas','selenium','time','threading','urllib','requests','random','datetime','json','os','getpass','zipfile','flask','pickle']
 for depend in dependencies:
     try:
         __import__(depend)
@@ -54,9 +54,9 @@ os.chdir(directory)
 print('DONE! Will install in %s\n'%(directory))
 time.sleep(2)
 
-install_type = input('What do you want to install?\n (1) KiteBase\n (2) KiteBase & KiteRange\n (3) KiteBase & KiteSwing\n (4) All the above\nResponse: ')
-while install_type not in ['1','2','3','4']:
-    install_type = input('Not a valid option\nWhat do you want to install?\n (1) KiteBase\n (2) KiteBase & KiteRange\n (3) KiteBase & KiteSwing\n (4) All the above\nResponse: ')
+install_type = input('What do you want to install?\n (1) KiteBase\n (2) KiteBase & KiteRange\n (3) KiteBase & KiteSwing\n (4) KiteBase & WeSFuT\n (5) All the above\nResponse: ')
+while install_type not in ['1','2','3','4','5']:
+    install_type = input('Not a valid option\nWhat do you want to install?\n (1) KiteBase\n (2) KiteBase & KiteRange\n (3) KiteBase & KiteSwing\n (4) KiteBase & WeSFuT\n (5) All the above\nResponse: ')
 
 #runfiles from server?
 run_from_server = input('Do you want to fetch runfiles from the server? (Y/N) ')
@@ -65,7 +65,12 @@ if run_from_server in ['Y','y']:
 else:
     run_from_server = False
 
-filelist = {'1':['fno_calendar.pyc','Instance.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],'2':['fno_calendar.pyc','Range.pyc','Instance.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],'3':['fno_calendar.pyc','Swing.pyc','Container.pyc','Instance.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],'4':['fno_calendar.pyc','Range.pyc','Instance.pyc','Swing.pyc','Container.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css']}
+filelist = {'1':['fno_calendar.pyc','Instance.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],
+            '2':['fno_calendar.pyc','Range.pyc','Instance.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],
+            '3':['fno_calendar.pyc','Swing.pyc','Container.pyc','Instance.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],
+            '5':['fno_calendar.pyc','Range.pyc','Instance.pyc','Swing.pyc','Container.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css','WeSFuT.pyc'],
+            '4':['fno_calendar.pyc','Instance.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css','WeSFuT.pyc']}
+
 if run_from_server:
     for file in os.listdir():
         if file in filelist[install_type]:
@@ -89,6 +94,10 @@ elif install_type=='3':
     r = requests.get(url, allow_redirects=True)
     open('KiteSwing.zip', 'wb').write(r.content)
 elif install_type=='4':
+    url = 'https://hknnisar.github.io/download/WeSFuT.zip'
+    r = requests.get(url, allow_redirects=True)
+    open('WeSFuT.zip', 'wb').write(r.content)
+elif install_type=='5':
     url = 'https://hknnisar.github.io/download/KiteRange.zip'
     r = requests.get(url, allow_redirects=True)
     open('KiteRange.zip', 'wb').write(r.content)
@@ -103,8 +112,15 @@ time.sleep(1)
 # if not os.path.isdir(directory+'\\__pycache__'):
 #     os.mkdir(directory+'\\__pycache__')
 
-ziplist = {'1':['KiteBase.zip'],'2':['KiteBase.zip','KiteRange.zip'],'3':['KiteBase.zip','KiteSwing.zip'],'4':['KiteBase.zip','KiteRange.zip','KiteSwing.zip']}
-zipfilelist = {'KiteBase.zip':['Instance.py','fno_calendar.py','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],'KiteRange.zip':['Range.py'],'KiteSwing.zip':['Swing.py','Container.py']}
+ziplist = {'1':['KiteBase.zip'],
+           '2':['KiteBase.zip','KiteRange.zip'],
+           '3':['KiteBase.zip','KiteSwing.zip'],
+           '4':['KiteBase.zip','WeSFuT.zip'],
+           '5':['KiteBase.zip','KiteRange.zip','KiteSwing.zip','WeSFuT.zip']}
+zipfilelist = {'KiteBase.zip':['Instance.py','fno_calendar.py','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],
+               'KiteRange.zip':['Range.py'],
+               'KiteSwing.zip':['Swing.py','Container.py'],
+               'WeSFuT.zip':['WeSFuT.py']}
 
 try:
     if not run_from_server:
@@ -289,7 +305,7 @@ except Exception as e:
     print('\nTo get a secret code please contact me on Telegram or Twitter @harshnisar or email me at harsh@harshnisar.com')
     time.sleep(1)
     for file in os.listdir():
-        if file in ['fno_calendar.pyc','Range.pyc','Instance.pyc','fno_calendar.py','Range.py','Instance.py','Swing.pyc','Container.pyc','Swing,py','Container.py','run.sh','app.pyc','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css']:
+        if file in ['fno_calendar.pyc','Range.pyc','Instance.pyc','fno_calendar.py','Range.py','Instance.py','Swing.pyc','Container.pyc','Swing,py','Container.py','run.sh','app.pyc','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css','WeSFuT.pyc','WeSFuT.py']:
             os.remove(directory+bs+file)
     for thefile in ziplist[install_type]:
         if os.path.isfile(directory+bs+thefile):
