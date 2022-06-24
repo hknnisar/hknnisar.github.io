@@ -65,11 +65,11 @@ if run_from_server in ['Y','y']:
 else:
     run_from_server = False
 
-filelist = {'1':['fno_calendar.pyc','Instance.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],
-            '2':['fno_calendar.pyc','Range.pyc','Instance.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],
-            '3':['fno_calendar.pyc','Swing.pyc','Container.pyc','Instance.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],
-            '5':['fno_calendar.pyc','Range.pyc','Instance.pyc','Swing.pyc','Container.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css','WeSFuT.pyc'],
-            '4':['fno_calendar.pyc','Instance.pyc','run.sh','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css','WeSFuT.pyc']}
+filelist = {'1':['fno_calendar.pyc','Instance.pyc','run.sh','app.pyc','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],
+            '2':['fno_calendar.pyc','Range.pyc','Instance.pyc','run.sh','app.pyc','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],
+            '3':['fno_calendar.pyc','Swing.pyc','Container.pyc','Instance.pyc','run.sh','app.pyc','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css'],
+            '5':['fno_calendar.pyc','Range.pyc','Instance.pyc','Swing.pyc','Container.pyc','run.sh','app.pyc','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css','WeSFuT.pyc'],
+            '4':['fno_calendar.pyc','Instance.pyc','run.sh','app.pyc','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css','WeSFuT.pyc']}
 
 if run_from_server:
     for file in os.listdir():
