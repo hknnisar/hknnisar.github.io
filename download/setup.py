@@ -29,7 +29,7 @@ time.sleep(1)
 
 print('\nChecking dependencies...')
 time.sleep(1)
-dependencies = ['kiteconnect','pandas','selenium','time','threading','urllib','requests','random','datetime','json','os','getpass','zipfile','flask','pickle']
+dependencies = ['kiteconnect','pandas','selenium','time','threading','urllib','requests','random','datetime','json','os','getpass','zipfile','flask','pickle','ntplib']
 for depend in dependencies:
     try:
         __import__(depend)
