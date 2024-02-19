@@ -24,6 +24,29 @@
 		margin-left: 5%;
         font-weight: 100;
     }
+    div.question {
+        font-family: 'Verdana',sans-serif;
+        text-align: center;
+		font-size: 2.5em;
+		width: 80%;
+		/* margin-left: 20%; */
+        font-weight: 100;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 0.5em;
+    }
+    div.instruction {
+        font-family: 'Verdana',sans-serif;
+        text-align: left;
+		font-size: 1.25em;
+		width: 80%;
+		/* margin-left: 20%; */
+        font-weight: 100;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 0.5em;
+        font-style: italic;
+    }
     input {
         display:block;
         margin-left: auto;
@@ -131,16 +154,108 @@ padding: 6px 12px;
 <body>
     <div class="main">
         <h1 >Kunjan's <b>Birthday</b> Puzzle</h1>
+        <div class="question"><b>Current Question</b></div>
+        <div class="question" id="question1">In the year of 26th July, a movie with its name bearing two words which mean the same takes place in this city.</div>
         <input class="input-15" type="text" name="image_src" id="image-src">
         <button class="button-15" onClick="putInputValue()">Generate</button>
     </div>
     <img id="input-image">
-    
+    <div class="question"><b>Next Question</b></div>
+    <div class="question" id="question2"></div>
+    <div class="instruction">
+        <b>Instructions:</b><br>The gift is hidden behind thirty seven layers. There are thirty seven questions. Upon each correct answer, a lawyer will be unveiled. Answer all to win. Hope you have fun. It took me twelve hours of nonstop work to create this game. The steps are as follows:
+        <br>1. Start with the first question. The first charater of the answer to the question in uppercase forms the seed. Remember this seed.
+        <br>2. Input this seed and hit Generate. Upon hitting generate, a layer will be unveiled and a new question will be generated.
+        <br>3. Find the first character in uppercase of the answer to the new question. This is the new seed. 
+        <br>4. Add the new seed to the old seed and hit generate again. This is the cycle.
+        <br>5. Remember, the further you reach in the game, the longer the seed will become, keep the seed safe in order to restart the game where you left-off. Thats it!
+        <br>Enjoy!
+    </div>
     <script>
         function putInputValue() {
+            // var quest = {"02":"01"}
+            var quest1 = 
+            {"M":"In the year of 26th July, a movie with its name bearing two words which mean the same takes place in this city.",
+"MB":"In the year when Dolly the Sheep became the first mammal to have been cloned, the King of Pop had to pay a visit to this cartoonist in order to perform in India.",
+"MBS":"In the year of the largest European conflict since WWII, a high budget fantasy-action-adventure movie became infamous for this repetitive dialogue.",
+"MBSN":"In the year when the Paris Climate Accords are adopted, this actor plays Pakistani News Reporter.",
+"MBSNS":"In the year when the first mission landed near the Lunar South Pole, Akshay Kumar plays this God in a movie.",
+"MBSNST":"In the year when Nelson Mandela first cast his vote in South African general elections, a Pomeranian known as this won Hindi cinema viewer's hearts.",
+"MBSNSTP":"In the year of the release of the iPhone, the captian of this team miscues a full-toss by Joginder Sharma to give away his wicket and start the T-20 cricket revolution.",
+"MBSNSTPN":"In the year when a 6-year-old declared the reincarnation of the Panchen Lama is kidnapped by Chinese Authorities, a foreigh actor from this country co-stars in a movie based on Kramer vs. Kramer.",
+"MBSNSTPNS":"In the year when the Soviet Union collapsed, and India got a radical economic reformist Prime Minister, the duo from Hello Brother starred in this movie.",
+"MBSNSTPNSM":"In the year when the God Particle was discovered, the radio made by this company could not be heard by the protagonist of a movie.",
+"MBSNSTPNSMC":"In the year when Space Shuttle Columbia disintigrates killing the first Indian origin woman to fly into outer space, the scheme to woe a woman designed by the character dying of terminal diesase involves how many days (in hindi)?",
+"MBSNSTPNSMCR":"In the year when sanctions are enacted against India for WMD tests, a movie based on Seven Samurai with a special appearance by a 24 year old actress is directed by this person.",
+"MBSNSTPNSMCRS":"In the year when both Koreans top leader meet in the DMZ for the first time, the biopic of this personality is claimed to be a whitewashing.",
+"MBSNSTPNSMCRSA":"In the year of when a 7.7M earthquake hit Gujarat, the airspace of a country was closed due to a terror attack by this group.",
+"MBSNSTPNSMCRSAS":"Today is a?",
+"MBSNSTPNSMCRSASC":"In the year when a movie about a scientist from Laddakh grosses more than the budget of the ISRO lunar mission called this.",
+"MBSNSTPNSMCRSASCV":"In the year when three new states are carved out, Dr.Rajkumar is taken hostage but this notorious bandit.",
+"MBSNSTPNSMCRSASCVM":"In a year of high interreligious violence, the movie character who forgets the names of the people around him and also forgets his name too is named this.",
+"MBSNSTPNSMCRSASCVMT":"In this (spelled) year of major shift, Britain exits the EU, Trump is elected and large bank notes are demonetised in India.",
+"MBSNSTPNSMCRSASCVMTM":"In the year of the great Tsunami in the Indian Ocean, in the movie about a NASA scientist returning to India, the lead, while squeazed between two on a moped, is sitting behind the character named this.",
+"MBSNSTPNSMCRSASCVMTMC":"In the year when a movie with a name of a city was released, in this city, five years earlier, Tendulkar devoted the match winning knock to Mumbai, which at the time was barely recovering from a terror attack.",
+"MBSNSTPNSMCRSASCVMTMCP":"In the year of of the signing of the N-Deal, this polititian in contention to be the top leader of the BJP was shot by his brother over a family dispute.",
+"MBSNSTPNSMCRSASCVMTMCPT":"In the year when Lehman Bros went bankrupt, this company buys two British luxury automibile companies from Ford after launching the worls cheapest car.",
+"MBSNSTPNSMCRSASCVMTMCPTH":"In the year when ZeeTV was first launched, the now liberalized India setup the Securities and Exchange Board of India as a response to a scam by this person.",
+"MBSNSTPNSMCRSASCVMTMCPTHK":"In the year when Mumbai subject to a mishap similar to the Deepwater Horizon spill, two movies topped the box-office, each with this last word in their name.",
+"MBSNSTPNSMCRSASCVMTMCPTHKH":"In the year of the Kargil War, this actor plays the mother of the lead, who comes from Italy to India to learn.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHR":"In the year Roy won the Booker prize for her debut novel, the surviving lead character in the movie about an accident in the North Atlantic is named this.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRK":"In the year when the BSE building and 11 other locations in Bombay were bombed, and druglord Pablo Escobar was killed, this actor made their movie debut with Aamir Khan.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKN":"In the year when a six in Wankhede was recieved with roars all over the country, the most wanted person in the world was killed in an operation named behind this planet.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKNB":"The color of the dog that scared you when you were young?",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKNB8":"In the year when India had their best tally at the olympics, this movie about India's  extraordinary campaign of the Prudential Cup was released.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKNB8S":"In the year North Korea successfully displayed WMD capabilities, this movie about an aspiring singer who disguises her identity online grosses the most.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKNB8SM":"In the year Russia annexed Crimea, the newly elected PM of India congratulated ISRO for this successfull inter-planetary project.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKNB8SMA":"In in this month, Eva's vaccinations are due.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKNB8SMAT":"On this day we commited to each other.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKNB8SMATD":"In the year of CoVID-19, this President of the United States was first impeached.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKNB8SMATDG":"In the year of the Pulwama attack, a song from this rags-to-riches movie about a young artist from the slums featured the pro-Kashmiri-independence - Azadi - slogan."};
+            var quest2 = 
+            {"M":"In the year when Dolly the Sheep became the first mammal to have been cloned, the King of Pop had to pay a visit to this cartoonist in order to perform in India.",
+"MB":"In the year of the largest European conflict since WWII, a high budget fantasy-action-adventure movie became infamous for this repetitive dialogue.",
+"MBS":"In the year when the Paris Climate Accords are adopted, this actor plays Pakistani News Reporter.",
+"MBSN":"In the year when the first mission landed near the Lunar South Pole, Akshay Kumar plays this God in a movie.",
+"MBSNS":"In the year when Nelson Mandela first cast his vote in South African general elections, a Pomeranian known as this won Hindi cinema viewer's hearts.",
+"MBSNST":"In the year of the release of the iPhone, the captian of this team miscues a full-toss by Joginder Sharma to give away his wicket and start the T-20 cricket revolution.",
+"MBSNSTP":"In the year when a 6-year-old declared the reincarnation of the Panchen Lama is kidnapped by Chinese Authorities, a foreigh actor from this country co-stars in a movie based on Kramer vs. Kramer.",
+"MBSNSTPN":"In the year when the Soviet Union collapsed, and India got a radical economic reformist Prime Minister, the duo from Hello Brother starred in this movie.",
+"MBSNSTPNS":"In the year when the God Particle was discovered, the radio made by this company could not be heard by the protagonist of a movie.",
+"MBSNSTPNSM":"In the year when Space Shuttle Columbia disintigrates killing the first Indian origin woman to fly into outer space, the scheme to woe a woman designed by the character dying of terminal diesase involves how many days (in hindi)?",
+"MBSNSTPNSMC":"In the year when sanctions are enacted against India for WMD tests, a movie based on Seven Samurai with a special appearance by a 24 year old actress is directed by this person.",
+"MBSNSTPNSMCR":"In the year when both Koreans top leader meet in the DMZ for the first time, the biopic of this personality is claimed to be a whitewashing.",
+"MBSNSTPNSMCRS":"In the year of when a 7.7M earthquake hit Gujarat, the airspace of a country was closed due to a terror attack by this group.",
+"MBSNSTPNSMCRSA":"Today is a?",
+"MBSNSTPNSMCRSAS":"In the year when a movie about a scientist from Laddakh grosses more than the budget of the ISRO lunar mission called this.",
+"MBSNSTPNSMCRSASC":"In the year when three new states are carved out, Dr.Rajkumar is taken hostage but this notorious bandit.",
+"MBSNSTPNSMCRSASCV":"In a year of high interreligious violence, the movie character who forgets the names of the people around him and also forgets his name too is named this.",
+"MBSNSTPNSMCRSASCVM":"In this (spelled) year of major shift, Britain exits the EU, Trump is elected and large bank notes are demonetised in India.",
+"MBSNSTPNSMCRSASCVMT":"In the year of the great Tsunami in the Indian Ocean, in the movie about a NASA scientist returning to India, the lead, while squeazed between two on a moped, is sitting behind the character named this.",
+"MBSNSTPNSMCRSASCVMTM":"In the year when a movie with a name of a city was released, in this city, five years earlier, Tendulkar devoted the match winning knock to Mumbai, which at the time was barely recovering from a terror attack.",
+"MBSNSTPNSMCRSASCVMTMC":"In the year of of the signing of the N-Deal, this polititian in contention to be the top leader of the BJP was shot by his brother over a family dispute.",
+"MBSNSTPNSMCRSASCVMTMCP":"In the year when Lehman Bros went bankrupt, this company buys two British luxury automibile companies from Ford after launching the worls cheapest car.",
+"MBSNSTPNSMCRSASCVMTMCPT":"In the year when ZeeTV was first launched, the now liberalized India setup the Securities and Exchange Board of India as a response to a scam by this person.",
+"MBSNSTPNSMCRSASCVMTMCPTH":"In the year when Mumbai subject to a mishap similar to the Deepwater Horizon spill, two movies topped the box-office, each with this last word in their name.",
+"MBSNSTPNSMCRSASCVMTMCPTHK":"In the year of the Kargil War, this actor plays the mother of the lead, who comes from Italy to India to learn.",
+"MBSNSTPNSMCRSASCVMTMCPTHKH":"In the year Roy won the Booker prize for her debut novel, the surviving lead character in the movie about an accident in the North Atlantic is named this.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHR":"In the year when the BSE building and 11 other locations in Bombay were bombed, and druglord Pablo Escobar was killed, this actor made their movie debut with Aamir Khan.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRK":"In the year when a six in Wankhede was recieved with roars all over the country, the most wanted person in the world was killed in an operation named behind this planet.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKN":"The color of the dog that scared you when you were young?",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKNB":"In the year when India had their best tally at the olympics, this movie about India's  extraordinary campaign of the Prudential Cup was released.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKNB8":"In the year North Korea successfully displayed WMD capabilities, this movie about an aspiring singer who disguises her identity online grosses the most.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKNB8S":"In the year Russia annexed Crimea, the newly elected PM of India congratulated ISRO for this successfull inter-planetary project.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKNB8SM":"In in this month, Eva's vaccinations are due.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKNB8SMA":"On this day we commited to each other.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKNB8SMAT":"In the year of CoVID-19, this President of the United States was first impeached.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKNB8SMATD":"In the year of the Pulwama attack, a song from this rags-to-riches movie about a young artist from the slums featured the pro-Kashmiri-independence - Azadi - slogan.",
+"MBSNSTPNSMCRSASCVMTMCPTHKHRKNB8SMATDG":"DONE!"};
             var imageSrcValue = document.getElementById("image-src").value;
             var image = document.getElementById("input-image");
             image.setAttribute('src', "./kdbde/"+imageSrcValue+".png");
+            // image.setAttribute('src', "./kdbde/"+quest[imageSrcValue]+".png");
+            document.getElementById("question1").innerHTML = quest1[imageSrcValue];
+            document.getElementById("question2").innerHTML = quest2[imageSrcValue];
         }
     </script>
 </body>
