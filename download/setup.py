@@ -330,7 +330,7 @@ except Exception as e:
     time.sleep(1)
     for file in os.listdir():
         # if file in ['fno_calendar.pyc','ShInSt.pyc','Instance.pyc','Ticker.pyc','fno_calendar.py','Range.py','Instance.py','Swing.pyc','Container.pyc','Swing,py','Container.py','run.sh','app.pyc','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css','WeSFuT.pyc','WeSFuT.py']:
-        if file in ['fno_calendar.pyc','Instance.pyc','Ticker.pyc','fno_calendar.py','Instance.py','Swing.pyc','Swing,py','run.sh','app.pyc','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css']:
+        if file in ['fno_calendar.pyc','Instance.pyc','Ticker.pyc','Ticker.py','fno_calendar.py','Instance.py','Swing.pyc','Swing,py','run.sh','app.pyc','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css']:
 
             os.remove(directory+bs+file)
     for thefile in ziplist[install_type]:
