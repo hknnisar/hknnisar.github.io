@@ -13,6 +13,7 @@ import requests
 import py_compile
 import time
 import subprocess
+import shutil
 
 task_summary = []
 
@@ -160,7 +161,9 @@ try:
                     files.remove(item)
                 except:
                     pass
-            py_compile.main(files)
+            for file in files:
+                py_compile.compile(file)
+            # py_compile.main(files)
             for file in files:
                 os.remove(directory+bs+file) 
             pycache = '__pycache__'
@@ -333,6 +336,8 @@ except Exception as e:
         if file in ['fno_calendar.pyc','Instance.pyc','Ticker.pyc','Ticker.py','fno_calendar.py','Instance.py','Swing.pyc','Swing,py','run.sh','app.pyc','app.py','templates'+bs+'index.html','templates'+bs+'success.html','templates'+bs+'shut.html','status'+bs+'icon_round.svg','static'+bs+'css'+bs+'style.css']:
 
             os.remove(directory+bs+file)
+        elif file in ['static','templates']:
+            shutil.rmtree(directory+bs+file)
     for thefile in ziplist[install_type]:
         if os.path.isfile(directory+bs+thefile):
             os.remove(directory+bs+thefile)
