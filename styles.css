@@ -284,7 +284,7 @@ div.footer {
 	*/
 	.content {
         width: 90%; 
-        max-width: 800px; /* The maximum width of your column */
+        max-width: 640px; /* The maximum width of your column */
         margin: 0 auto; /* Centers the div */
         padding-left: 0; 
         padding-right: 0;
@@ -299,12 +299,12 @@ div.footer {
            If screen is < 888px, it uses 5% margin (to match width: 90%).
            If screen is > 888px, it calculates the exact dead space outside the 800px column.
         */
-        margin-left: max(5%, calc(50% - 400px)); 
+        margin-left: max(5%, calc(50% - 320px)); 
     }
 
     .hright {
         /* Matches the remaining width of the 800px column perfectly using percentages */
-        width: calc(min(800px, 90%) - 6.5em); 
+        width: calc(min(640px, 90%) - 6.5em); 
     }
 } 
 
@@ -312,19 +312,28 @@ div.footer {
 	.content{
 		/* margin-top: 6em; */
 		width: 95%;
+		max-width: 650px; /* Caps the width on wide tablets */
+		margin: 0 auto; /* Centers the content */
+		padding-left: 0; 
+        padding-right: 0;
 		line-height: 1.5em;
-		padding-left: 2%;
-		padding-right: 3%;
+		/* padding-left: 2%; */
+		/* padding-right: 3%; */
 		padding-top: 1.25em;
 		--width: 100%;
 		margin-bottom: calc(var(--width)/6 - 6rem);
 	}
 
 	.hleft{
-		margin-left: 0%;
+		/* margin-left: 0%; */
+		/* Matches "margin: 0 auto". 
+           Uses 2.5% for narrow screens, or exact pixels for wide screens. */
+        margin-left: max(2.5%, calc(50% - 325px));
 	}
 	.hright{
-		width: calc(100vw - 8em - 0%);
+		/* width: calc(100vw - 8em - 0%); */
+		/* Fills the remaining space of the column, subtracting your 7.5em logo */
+        width: calc(min(650px, 95%) - 7.5em);
 	}
 
 	date{
